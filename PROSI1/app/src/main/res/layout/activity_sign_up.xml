@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignUp">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pengguna Baru"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_marginLeft="10dp"
+        android:layout_above="@id/et_username"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo_fnb" />
+
+    <EditText
+        android:id="@+id/et_username"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="username"
+        android:layout_centerInParent="true"/>
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/logo_fnb" />
+    <EditText
+        android:id="@+id/et_hp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="phone number"
+        android:inputType="number"
+        android:layout_below="@id/et_username"/>
 
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="username"
-            android:layout_below="@id/logo"/>
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="password"
+        android:layout_below="@id/et_hp"/>
 
-        <EditText
-            android:id="@+id/et_hp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="phone number"
-            android:inputType="number"
-            android:layout_below="@id/et_username"/>
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daftar"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"/>
 
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="password"
-            android:layout_below="@id/et_hp"/>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="daftar"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/et_password"/>
-
-
-    </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
