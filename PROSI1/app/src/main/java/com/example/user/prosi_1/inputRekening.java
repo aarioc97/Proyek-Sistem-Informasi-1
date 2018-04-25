@@ -3,7 +3,7 @@ package com.example.user.prosi_1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class inputRekening extends AppCompatActivity {
+public class InputRekening extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

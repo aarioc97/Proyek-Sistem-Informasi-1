@@ -20,7 +20,8 @@
         <activity android:name=".SignUp" />
         <activity android:name=".PilihRole" />
         <activity android:name=".inputRekening" />
-        <activity android:name=".PostBarang"></activity>
+        <activity android:name=".PostBarang" />
+        <activity android:name=".SecondPhaseLogin"></activity>
     </application>
 
 </manifest>
