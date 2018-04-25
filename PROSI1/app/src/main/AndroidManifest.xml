@@ -19,7 +19,8 @@
         <activity android:name=".LoginPage" />
         <activity android:name=".SignUp" />
         <activity android:name=".PilihRole" />
-        <activity android:name=".inputRekening"></activity>
+        <activity android:name=".inputRekening" />
+        <activity android:name=".PostBarang"></activity>
     </application>
 
 </manifest>

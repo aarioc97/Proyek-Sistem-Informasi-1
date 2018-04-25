@@ -33,11 +33,25 @@
             ></Spinner>
 
         <TextView
+            android:id="@+id/kota_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Bank"
+            android:layout_below="@id/spinner_nama_bank"/>
+
+        <Spinner
+            android:id="@+id/spinner_kota_bank"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/kota_bank"
+            ></Spinner>
+
+        <TextView
             android:id="@+id/nama_lengkap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Lengkap"
-            android:layout_below="@id/spinner_nama_bank"/>
+            android:layout_below="@id/spinner_kota_bank"/>
 
         <EditText
             android:id="@+id/et_nama"

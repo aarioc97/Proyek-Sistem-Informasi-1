@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostBarang">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post Request"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Detail Barang"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@id/tv_post"/>
+
+        <TextView
+            android:id="@+id/ingin_beli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apa yang ingin kamu beli"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/tv_detail"/>
+
+        <ImageView
+            android:id="@+id/iv_canvas"
+            android:layout_width="83dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/ingin_beli"
+            android:layout_marginLeft="30dp"
+            android:text="Apa yang ingin kamu beli" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_canvas"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
