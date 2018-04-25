@@ -15,8 +15,8 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_login);
 
-        signUp = this.findViewById(R.id.signup);
-        logins = this.findViewById(R.id.login);
+        signUp = this.findViewById(R.id.btn_signup);
+        logins = this.findViewById(R.id.btn_login);
 
         logins.setOnClickListener(this);
         signUp.setOnClickListener(this);
@@ -26,13 +26,13 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(view == logins){
-            Intent intent= new Intent(this, LoginPage.class);
-            startActivity(intent);
+        if(view.getId() == logins.getId()){
+            Intent intent1 = new Intent(this, LoginPage.class);
+            startActivity(intent1);
         }
-        if(view == signUp){
-            Intent intent= new Intent(this, SignUp.class);
-            startActivity(intent);
+        if(view.getId() == signUp.getId()){
+            Intent intent2 = new Intent(this, SignUp.class);
+            startActivity(intent2);
         }
     }
 }

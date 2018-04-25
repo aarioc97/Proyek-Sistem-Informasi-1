@@ -13,7 +13,7 @@
         android:src="@drawable/logo_fnb" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -27,12 +27,12 @@
         android:text="atau"
         android:textSize="20dp"
         android:layout_centerInParent="true"
-        android:layout_below="@id/signup"
+        android:layout_below="@id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/btn_login"
         android:textAllCaps="false"
         android:textSize="20dp"
         android:layout_centerInParent="true"

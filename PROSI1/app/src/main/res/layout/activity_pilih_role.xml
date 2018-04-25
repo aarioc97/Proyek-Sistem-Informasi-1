@@ -1,42 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".pilihRole">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Pilih Peran (Role) Kamu"
+        android:textColor="#000"
+        android:textSize="20dp"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:text="Pilih Peran (Role) Kamu"
-            android:textSize="20dp"/>
+    <ImageButton
+        android:id="@+id/btn_traveller"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:foreground="@drawable/traveller"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"/>
 
-        <Button
-            android:id="@+id/b_traveller"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50dp"
-            android:text="Traveller"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#000"
+        android:text="TRAVELLER"
+        android:layout_below="@id/btn_traveller"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"/>
 
-        <Button
-            android:id="@+id/b_requester"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:text="Requester" />
+    <ImageButton
+        android:id="@+id/btn_requester"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:foreground="@drawable/requester"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#000"
+        android:text="REQUESTER"
+        android:layout_below="@id/btn_requester"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"/>
 
     </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>

@@ -8,23 +8,23 @@ import android.widget.Button;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
-    Button logins;
+    Button daftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        logins = this.findViewById(R.id.btn_login);
+        daftar = this.findViewById(R.id.btn_daftar);
 
-        logins.setOnClickListener(this);
+        daftar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if(view == logins){
-            Intent intent= new Intent(this, pilihRole.class);
-            startActivity(intent);
+        if(view.getId() == daftar.getId()){
+            Intent intent1 = new Intent(this, PilihRole.class);
+            startActivity(intent1);
         }
     }
 }

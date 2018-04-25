@@ -32,17 +32,17 @@
         android:layout_centerInParent="true"/>
 
     <EditText
-        android:id="@+id/et_hp"
+        android:id="@+id/et_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="phone number"
-        android:inputType="number"
+        android:hint="password"
+        android:inputType="textPassword"
         android:layout_below="@id/et_username"/>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_login_to_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
