@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".inputRekening">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/logo_fnb" />
+
+        <TextView
+            android:id="@+id/nama_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Bank"
+            android:layout_below="@id/logo"/>
+
+        <Spinner
+            android:id="@+id/spinner_nama_bank"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/nama_bank"
+            ></Spinner>
+
+        <TextView
+            android:id="@+id/nama_lengkap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap"
+            android:layout_below="@id/spinner_nama_bank"/>
+
+        <EditText
+            android:id="@+id/et_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nama_lengkap"/>
+
+        <TextView
+            android:id="@+id/no_rek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="input nama rekening"
+            android:layout_below="@id/et_nama"/>
+
+        <EditText
+            android:id="@+id/et_no_rek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/no_rek"/>
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

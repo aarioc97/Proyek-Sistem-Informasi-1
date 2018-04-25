@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".LoginPage" />
         <activity android:name=".SignUp" />
-        <activity android:name=".PilihRole"></activity>
+        <activity android:name=".PilihRole" />
+        <activity android:name=".inputRekening"></activity>
     </application>
 
 </manifest>
