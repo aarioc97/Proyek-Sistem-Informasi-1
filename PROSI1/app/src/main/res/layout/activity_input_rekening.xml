@@ -67,5 +67,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/no_rek"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_below="@id/et_no_rek"
+            android:layout_centerInParent="true"/>
+
 
     </RelativeLayout>
