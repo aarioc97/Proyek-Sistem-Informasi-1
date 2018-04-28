@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fly n Buy</string>
+    <string name="dialog_yes">Ya</string>
+    <string name="dialog_no">Tidak</string>
 </resources>

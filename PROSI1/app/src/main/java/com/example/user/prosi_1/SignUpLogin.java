@@ -1,10 +1,15 @@
 package com.example.user.prosi_1;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class SignUpLogin extends AppCompatActivity implements View.OnClickListener{
 
@@ -34,5 +39,26 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
             Intent intent2 = new Intent(this, SignUp.class);
             startActivity(intent2);
         }
+    }
+
+    boolean backTwice;
+    @Override
+    public void onBackPressed(){
+        if(backTwice==true){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }
+        Toast.makeText(this, "Tekan 'kembali' sekali lagi untuk keluar.", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backTwice = false;
+            }
+        }, 3000);
+        backTwice = true;
     }
 }
