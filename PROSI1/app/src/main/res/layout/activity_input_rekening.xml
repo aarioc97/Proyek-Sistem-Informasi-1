@@ -3,76 +3,86 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fdfdfe">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/logo_fnb" />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo_fnb" />
+
+    <LinearLayout
+        android:id="@+id/ll_input_rek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/logo">
 
         <TextView
-            android:id="@+id/nama_bank"
+            android:id="@+id/tv_nama_bank_rek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Bank"
-            android:layout_below="@id/logo"/>
+            android:text="Nama Bank"/>
 
         <Spinner
             android:id="@+id/spinner_nama_bank"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/nama_bank">
+            android:layout_height="50dp">
         </Spinner>
 
         <TextView
-            android:id="@+id/kota_bank"
+            android:id="@+id/tv_kota_bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kota Bank"
-            android:layout_below="@id/spinner_nama_bank"/>
+            android:text="Kota Bank"/>
 
         <Spinner
             android:id="@+id/spinner_kota_bank"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/kota_bank">
+            android:layout_height="50dp">
         </Spinner>
 
-        <TextView
-            android:id="@+id/nama_lengkap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Lengkap"
-            android:layout_below="@id/spinner_kota_bank"/>
-
-        <EditText
-            android:id="@+id/et_nama"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nama_lengkap"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/no_rek"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="input nama rekening"
-            android:layout_below="@id/et_nama"/>
+            <EditText
+                android:id="@+id/et_username_daftar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="username"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
 
-        <EditText
-            android:id="@+id/et_no_rek"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/no_rek"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_below="@id/et_no_rek"
-            android:layout_centerInParent="true"/>
+            <EditText
+                android:id="@+id/et_no_rek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_daftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"/>
 
 
     </RelativeLayout>
