@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fdfdfe">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,11 +14,11 @@
         android:textColor="#000"
         android:textSize="20dp"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/btn_traveller"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:foreground="@drawable/traveller"
+        android:background="@drawable/traveller"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="50dp"/>
@@ -32,11 +33,11 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="60dp"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/btn_requester"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:foreground="@drawable/requester"
+        android:background="@drawable/requester"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="50dp"/>

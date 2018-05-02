@@ -23,7 +23,9 @@
         <activity android:name=".PilihRole" />
         <activity android:name=".inputRekening" />
         <activity android:name=".PostBarang" />
-        <activity android:name=".SecondPhaseLogin"></activity>
+        <activity android:name=".SecondPhaseLogin" />
+        <activity android:name=".Home" />
+        <activity android:name=".EmailNotification"></activity>
     </application>
 
 </manifest>
