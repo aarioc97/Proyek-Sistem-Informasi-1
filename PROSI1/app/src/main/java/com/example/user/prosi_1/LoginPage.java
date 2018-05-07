@@ -32,7 +32,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     Button login_to_app;
     EditText username, password;
     RequestQueue requestQueue;
-    private static final String URL = "http://127.0.0.1/";
+    private static final String URL = "http://127.0.0.1:80/flynbuy/login_control.php";
     private StringRequest request;
 
     @Override
