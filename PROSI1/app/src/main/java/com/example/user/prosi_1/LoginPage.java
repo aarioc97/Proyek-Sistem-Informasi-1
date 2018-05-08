@@ -1,5 +1,6 @@
 package com.example.user.prosi_1;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -9,46 +10,75 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
-    Button login_to_app;
+    Button loginToApp;
     Connection con;
     String un, pass, db, ip;
-    EditText username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        login_to_app = this.findViewById(R.id.btn_login_to_app);
-        login_to_app.setOnClickListener(this);
-
-        username = this.findViewById(R.id.et_username_login);
-        password = this.findViewById(R.id.et_password_login);
-
-
+        loginToApp = this.findViewById(R.id.btn_login_to_app);
+        loginToApp.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        String restURL = "flynbuy.com";
-
+        String restURL = "http://www.flynbuy.com";
+        new CheckLogin().execute(restURL);
     }
 
-    public class checkLogin extends AsyncTask<String, String, String> {
+    private class CheckLogin extends AsyncTask<String, String, String> {
 
-        String z = "";
-        Boolean isSuccess = false;
+        final HttpClient httpClient = new DefaultHttpClient();
+        String content, error, data = "";
+        ProgressDialog progressDialog = new ProgressDialog(LoginPage.this);
+        EditText username = findViewById(R.id.et_username_login);
+        EditText password = findViewById(R.id.et_password_login);
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progressDialog.setTitle("Please wait...");
+            progressDialog.show();
+            try {
+                data += "&" + URLEncoder.encode("data", "UTF-8") + "-" + username.getText();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
 
         @Override
         protected String doInBackground(String... strings) {
-            String usernam = username.getText().toString();
-            String passwordd = password.getText().toString();
+
+            BufferedReader br = null;
+            try{
+                URL url = new URL(params[0]);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+            } catch (MalformedURLException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
 
             if (usernam.trim().equals("") || passwordd.trim().equals("")) {
                 z = "Please enter username and password";
@@ -68,6 +98,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             return z;
         }
     }
+
+    @Override
+    protected void onPostExecute(Void res){
+
+    }
+
+    //--------------------------------------------//
 
     public Connection connectionclass(String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

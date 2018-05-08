@@ -19,30 +19,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/logo">
+        android:layout_below="@id/logo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
             android:id="@+id/tv_nama_bank_rek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Bank"/>
+            android:text="Nama Bank"
+            android:textSize="8pt"/>
 
         <Spinner
             android:id="@+id/spinner_nama_bank"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="40dp">
         </Spinner>
 
         <TextView
             android:id="@+id/tv_kota_bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kota Bank"/>
+            android:text="Kota Bank"
+            android:textSize="8pt"/>
 
         <Spinner
             android:id="@+id/spinner_kota_bank"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="40dp">
         </Spinner>
 
         <android.support.design.widget.TextInputLayout
@@ -53,9 +58,7 @@
                 android:id="@+id/et_username_daftar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="username"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:hint="Nama Lengkap"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -66,7 +69,8 @@
             <EditText
                 android:id="@+id/et_no_rek"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:hint="Input Nomor Rekening"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +78,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_daftar"
+        android:id="@+id/btn_submit_rek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"

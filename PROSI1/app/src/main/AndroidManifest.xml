@@ -21,11 +21,10 @@
         <activity android:name=".LoginPage" />
         <activity android:name=".SignUp" />
         <activity android:name=".PilihRole" />
-        <activity android:name=".inputRekening" />
+        <activity android:name=".InputRekening" />
         <activity android:name=".PostBarang" />
         <activity android:name=".SecondPhaseLogin" />
-        <activity android:name=".Home" />
-        <activity android:name=".EmailNotification"></activity>
+        <activity android:name=".Home" ></activity>
     </application>
 
 </manifest>
