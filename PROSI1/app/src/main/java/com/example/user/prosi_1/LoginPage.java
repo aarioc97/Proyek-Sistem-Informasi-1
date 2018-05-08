@@ -1,3 +1,5 @@
+package com.example.user.prosi_1;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +24,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginPage extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
     private EditText email,password;
-    private Button sign_in_register;
+    private Button signInRegister;
     private RequestQueue requestQueue;
     private static final String URL = "http://192.168.1.65:80/flynbuy/login_control.php";
     private StringRequest request;
@@ -37,51 +39,54 @@ public class LoginPage extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.et_username_login);
         password = (EditText) findViewById(R.id.et_password_login);
-        sign_in_register = (Button) findViewById(R.id.btn_login_to_app);
+        signInRegister= (Button) findViewById(R.id.btn_login_to_app);
 
         requestQueue = Volley.newRequestQueue(this);
 
-        sign_in_register.setOnClickListener(new View.OnClickListener() {
+        signInRegister.setOnClickListener(this);
+    }
 
-            @Override
-            public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == signInRegister.getId()){
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
+        }
 
-                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if(jsonObject.names().get(0).equals("success")){
-                                Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),Home.class));
-                            }else {
-                                Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String,String> hashMap = new HashMap<String, String>();
-                        hashMap.put("email",email.getText().toString());
-                        hashMap.put("password",password.getText().toString());
-
-                        return hashMap;
-                    }
-                };
-
-                requestQueue.add(request);
-            }
-        });
+//        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    if(jsonObject.names().get(0).equals("success")){
+//                        Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+//                       startActivity(new Intent(getApplicationContext(),Home.class));
+//                    }else {
+//                        Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                HashMap<String,String> hashMap = new HashMap<String, String>();
+//                hashMap.put("email",email.getText().toString());
+//                hashMap.put("password",password.getText().toString());
+//
+//                return hashMap;
+//           }
+//        };
+//
+//        requestQueue.add(request);
     }
 }
