@@ -1,6 +1,10 @@
 package com.example.user.prosi_1;
 
+<<<<<<< HEAD
 import android.app.ProgressDialog;
+=======
+import android.content.Intent;
+>>>>>>> 8cac79a609f9f806e1dda5cbd5098911091c00c2
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -23,12 +38,22 @@ import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
+<<<<<<< HEAD
     Button loginToApp;
     Connection con;
     String un, pass, db, ip;
+=======
+    Button login_to_app;
+    EditText username, password;
+    RequestQueue requestQueue;
+    private static final String URL = "http://127.0.0.1:80/flynbuy/login_control.php";
+    private StringRequest request;
+>>>>>>> 8cac79a609f9f806e1dda5cbd5098911091c00c2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +66,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+<<<<<<< HEAD
         String restURL = "http://www.flynbuy.com";
         new CheckLogin().execute(restURL);
     }
@@ -89,16 +115,41 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         z = "Check your internet access";
                     } else {
                         String query = "select * from login where username = '" + usernam.toString() + "' and password = '" + passwordd.toString() + "'";
+=======
+        if(view == login_to_app){
+            request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try{
+                        JSONObject jsonObject = new JSONObject(response);
+                        if(jsonObject.names().get(0).equals("success")){
+                            Toast.makeText(getApplicationContext(),"SUCCESS"+jsonObject.getString("success"),Toast.LENGTH_SHORT);
+                            startActivity(new Intent(getApplicationContext(),Home.class));
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Error"+jsonObject.getString("error"),Toast.LENGTH_SHORT);
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
+>>>>>>> 8cac79a609f9f806e1dda5cbd5098911091c00c2
                     }
-                } catch (Exception ex) {
-                    isSuccess = false;
-                    z = ex.getMessage();
                 }
-            }
-            return z;
-        }
-    }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError{
+                    HashMap<String,String> hashMap = new HashMap<String, String>();
+                    hashMap.put("username",username.getText().toString());
+                    hashMap.put("password",password.getText().toString());
+
+                    return hashMap;
+                }
+            };
+
+<<<<<<< HEAD
     @Override
     protected void onPostExecute(Void res){
 
@@ -121,7 +172,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             Log.e("error here 2 : ", se.getMessage());
         } catch (Exception e) {
             Log.e("error here 3 : ", e.getMessage());
+=======
+            requestQueue.add(request);
+>>>>>>> 8cac79a609f9f806e1dda5cbd5098911091c00c2
         }
-        return connection;
     }
 }
