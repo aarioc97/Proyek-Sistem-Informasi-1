@@ -1,22 +1,26 @@
 package com.example.user.prosi_1;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import java.io.IOException;
 
 public class SignUpLogin extends AppCompatActivity implements View.OnClickListener{
+
+    private DatabaseHelper mDBHelper;
+    private SQLiteDatabase mDb;
 
     Button signUp, logins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_login);
 
@@ -29,10 +33,12 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
     }
 
+
+
     @Override
     public void onClick(View view) {
         if(view.getId() == logins.getId()){
-            Intent intent1 = new Intent(this, LoginPage.class);
+            Intent intent1 = new Intent(this, LoginActivity.class);
             startActivity(intent1);
         }
         if(view.getId() == signUp.getId()){
