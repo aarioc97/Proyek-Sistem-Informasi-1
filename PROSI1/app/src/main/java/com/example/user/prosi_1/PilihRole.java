@@ -31,9 +31,15 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
         if(view.getId() == traveller.getId()){
             final Intent intent = new Intent(this, SecondPhaseLogin.class);
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
+            builder.setMessage("Ke mana kode verifikasi Anda akan dikirimkan?");
             builder.setCancelable(true);
-            builder.setPositiveButton("Lanjutkan login", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("e-mail", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
@@ -45,9 +51,15 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
         else if(view.getId() == requester.getId()){
             final Intent intent = new Intent(this, SecondPhaseLogin.class);
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
+            builder.setMessage("Ke mana kode verifikasi Anda akan dikirimkan?");
             builder.setCancelable(true);
-            builder.setPositiveButton("Lanjutkan login", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("e-mail", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
