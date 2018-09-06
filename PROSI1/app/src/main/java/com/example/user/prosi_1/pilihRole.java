@@ -28,18 +28,26 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == traveller.getId() || view.getId() == requester.getId()){
+        if(view.getId() == traveller.getId()){
             final Intent intent = new Intent(this, SecondPhaseLogin.class);
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Ke mana sebaiknya kode verifikasi Anda kami kirim?");
+            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
             builder.setCancelable(true);
-            builder.setPositiveButton("e-mail", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Lanjutkan login", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
                 }
             });
-            builder.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+        else if(view.getId() == requester.getId()){
+            final Intent intent = new Intent(this, SecondPhaseLogin.class);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Lanjutkan login", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
