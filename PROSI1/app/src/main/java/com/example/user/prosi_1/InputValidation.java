@@ -35,43 +35,9 @@ public class InputValidation {
             hideKeyboardFrom(textInputEditText);
             return false;
         } else {
-            textInputLayout.setErrorEnabled(false);
+//            textInputLayout.setErrorEnabled(false);
         }
 
-        return true;
-    }
-
-
-    /**
-     * method to check InputEditText has valid email .
-     *
-     * @param textInputEditText
-     * @param textInputLayout
-     * @param message
-     * @return
-     */
-    public boolean isInputEditTextEmail(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
-        String value = textInputEditText.getText().toString().trim();
-        if (value.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
-            textInputLayout.setError(message);
-            hideKeyboardFrom(textInputEditText);
-            return false;
-        } else {
-            textInputLayout.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    public boolean isInputEditTextMatches(TextInputEditText textInputEditText1, TextInputEditText textInputEditText2, TextInputLayout textInputLayout, String message) {
-        String value1 = textInputEditText1.getText().toString().trim();
-        String value2 = textInputEditText2.getText().toString().trim();
-        if (!value1.contentEquals(value2)) {
-            textInputLayout.setError(message);
-            hideKeyboardFrom(textInputEditText2);
-            return false;
-        } else {
-            textInputLayout.setErrorEnabled(false);
-        }
         return true;
     }
 

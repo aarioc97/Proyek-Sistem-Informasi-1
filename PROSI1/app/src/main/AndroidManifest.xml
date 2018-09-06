@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".SignUp" />
         <activity android:name=".PilihRole" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".InputRekening" />
         <activity android:name=".PostBarang" />
         <activity android:name=".SecondPhaseLogin" />
