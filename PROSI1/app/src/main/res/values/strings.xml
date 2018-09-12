@@ -10,6 +10,18 @@
     <string name="action_logout">Log Out</string>
     <string name="section_format">Halaman: %1$d</string>
     <string name="search_bar_str">Cari barang di sini...</string>
+    <string name="tutorial_req">Untuk mengajukan permintaan penitipan barang baru:\n\n
+    1. Klik tombol "+" dan pilih "Post Request".\n\n
+    2. Isi keterangan-keterangan detail barang yang wajib
+        dan diperlukan seperti gambar barang, deskripsi
+        barang, dan harga tawaran barang.\n\n
+    3. Biaya admin fee dan ongkir akan terisi secara
+        otomatis.\n\n
+    4. Klik tombol "Post" untuk mengajukan penitipan barang.\n\n
+    5. Setelah itu, Pegawai Transaksi akan mengecek
+        pesanan barang yang dipost.\n\n
+    6. Akan muncul notifikasi bahwa permintaan penitipan
+        barang Anda telah masuk ke dalam sistem.</string>
 
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>

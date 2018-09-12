@@ -2,10 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/iv_barang"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_barang"/>
+
     <TextView
+        android:id="@+id/tv_status_req"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Tab Requester"/>
+        android:layout_centerHorizontal="true"
+        android:text="Anda belum Post Barang apapun!"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/iv_barang"/>
+
+    <TextView
+        android:id="@+id/tv_tutorial_req"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_below="@id/tv_status_req"
+        android:text="@string/tutorial_req"/>
 
 </RelativeLayout>

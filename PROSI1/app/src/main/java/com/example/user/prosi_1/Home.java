@@ -140,7 +140,6 @@ public class Home extends AppCompatActivity {
             switch (position){
                 case 0:
                     TabHome tab1 = new TabHome();
-
                     return tab1;
                 case 1:
                     TabRequester tab2 = new TabRequester();

@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <SearchView
+        android:id="@+id/sv_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+    
+    <TextView
+        android:id="@+id/tv_r_by_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Request by Requester"
+        android:layout_below="@id/sv_home"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/link_r_by_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Lihat Semua"
+        android:linksClickable="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/sv_home"/>
 
 </RelativeLayout>
