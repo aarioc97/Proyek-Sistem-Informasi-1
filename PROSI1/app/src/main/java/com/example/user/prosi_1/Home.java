@@ -22,6 +22,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.prosi_1.home_tabs.TabHome;
+import com.example.user.prosi_1.home_tabs.TabRequester;
+import com.example.user.prosi_1.home_tabs.TabTraveller;
+
 public class Home extends AppCompatActivity {
 
     /**
@@ -133,7 +137,20 @@ public class Home extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position){
+                case 0:
+                    TabHome tab1 = new TabHome();
+
+                    return tab1;
+                case 1:
+                    TabRequester tab2 = new TabRequester();
+                    return tab2;
+                case 2:
+                    TabTraveller tab3 = new TabTraveller();
+                    return tab3;
+            }
+            return null;
+//            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
