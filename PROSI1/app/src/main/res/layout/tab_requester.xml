@@ -29,4 +29,14 @@
         android:layout_below="@id/tv_status_req"
         android:text="@string/tutorial_req"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@android:drawable/ic_input_add"/>
+
 </RelativeLayout>

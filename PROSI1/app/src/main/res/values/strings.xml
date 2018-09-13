@@ -22,6 +22,11 @@
         pesanan barang yang dipost.\n\n
     6. Akan muncul notifikasi bahwa permintaan penitipan
         barang Anda telah masuk ke dalam sistem.</string>
+    <string name="tutorial_trv">Untuk memberitahu barang ready stock yang akan Anda jual:\n\n
+    1. Klik tombol "+" dan pilih "Post Ready Stock".\n\n
+    2. Isi keterangan-keterangan detail barang yang wajib dan diperlukan.\n\n
+    3. Setelah semua data lengkap, klik tombol "Post".\n\n
+    4. Akan muncul notifikasi bahwa penawaran barang ready stock Anda sudah dipost.</string>
 
     <string name="text_accounts">All Accounts</string>
     <string name="hint_name">Name</string>

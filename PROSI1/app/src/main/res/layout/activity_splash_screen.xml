@@ -5,6 +5,7 @@
     android:id="@+id/splashsc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fdfdfe"
     tools:context="com.example.user.prosi_1.SplashScreen">
 
     <ImageView
