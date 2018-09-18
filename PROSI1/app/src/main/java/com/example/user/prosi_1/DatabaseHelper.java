@@ -5,250 +5,148 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
+    //DATABASE NAME
+    public static final String DATABASE_NAME = "flynbuy.sqlite";
 
-    // Database Name
-    private static final String DATABASE_NAME = "flynbuy.sqlite";
+    //DATABASE VERSION
+    public static final int DATABASE_VERSION = 1;
 
-    // User table name
-    private static final String TABLE_USER = "user";
+    //TABLE NAME
+    public static final String TABLE_USERS = "users";
 
-    // User Table Columns names
-    private static final String COLUMN_USER_ID = "id";
-    private static final String COLUMN_USER_NAME = "name";
-    private static final String COLUMN_USER_EMAIL = "email";
-    private static final String COLUMN_USER_PASSWORD = "password";
+    //TABLE USERS COLUMNS
+    //ID COLUMN @primaryKey
+    public static final String KEY_ID = "id";
 
-    // create table sql query
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+    //COLUMN user name
+    public static final String KEY_USER_NAME = "name";
 
-    // drop table sql query
-    private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+    //COLUMN email
+    public static final String KEY_EMAIL = "email";
 
-    /**
-     * Constructor
-     *
-     * @param context
-     */
+    //COLUMN isAdmin
+    public static final String KEY_ADMIN = "is_admin";
+
+    //COLUMN password
+    public static final String KEY_PASSWORD = "password";
+
+    //COLUMN password
+    public static final String KEY_TOKEN = "remember_token";
+
+    //COLUMN password
+    public static final String KEY_CREATE = "created_at";
+
+    //COLUMN password
+    public static final String KEY_UPDATE = "updated_at";
+
+    //COLUMN password
+    public static final String KEY_DELETE = "deleted";
+
+    //SQL for creating users table
+    public static final String SQL_TABLE_USERS = " CREATE TABLE " + TABLE_USERS
+            + " ( "
+            + KEY_ID + " INTEGER PRIMARY KEY, "
+            + KEY_USER_NAME + " TEXT, "
+            + KEY_EMAIL + " TEXT, "
+            + KEY_ADMIN + " TEXT, "
+            + KEY_PASSWORD + " TEXT, "
+            + KEY_TOKEN + " TEXT, "
+            + KEY_CREATE+ " TEXT, "
+            + KEY_UPDATE + " TEXT, "
+            + KEY_DELETE + " TEXT"
+            + " ) ";
+
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_USER_TABLE);
-    }
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        //Create Table when oncreate gets called
+        sqLiteDatabase.execSQL(SQL_TABLE_USERS);
 
+    }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        //Drop User Table if exist
-        db.execSQL(DROP_USER_TABLE);
-
-        // Create tables again
-        onCreate(db);
-
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        //drop table to create new one if database version updated
+        //sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_USERS);
     }
 
-    /**
-     * This method is to create user record
-     *
-     * @param user
-     */
+    //using this method we can add users to user table
     public void addUser(User user) {
+
+        //get writable database
         SQLiteDatabase db = this.getWritableDatabase();
 
+        //create content values to insert
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, user.getName());
-        values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
 
-        // Inserting Row
-        db.insert(TABLE_USER, null, values);
-        db.close();
+        //Put username in  @values
+        values.put(KEY_USER_NAME, user.userName);
+
+        //Put email in  @values
+        values.put(KEY_EMAIL, user.email);
+
+        //Put password in  @values
+        values.put(KEY_PASSWORD, user.password);
+
+        //Put password in  @values
+        values.put(KEY_ADMIN, "NULL");
+
+        //Put password in  @values
+        values.put(KEY_TOKEN, "NULL");
+
+        //Put password in  @values
+        values.put(KEY_UPDATE, "NULL");
+
+        //Put password in  @values
+        values.put(KEY_DELETE, "NULL");
+
+        // insert row
+        long todo_id = db.insert(TABLE_USERS, null, values);
     }
 
-    /**
-     * This method is to fetch all user and return the list of user records
-     *
-     * @return list
-     */
-    public List<User> getAllUser() {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_USER_ID,
-                COLUMN_USER_EMAIL,
-                COLUMN_USER_NAME,
-                COLUMN_USER_PASSWORD
-        };
-        // sorting orders
-        String sortOrder =
-                COLUMN_USER_NAME + " ASC";
-        List<User> userList = new ArrayList<User>();
-
+    public User Authenticate(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,// Selecting Table
+                new String[]{KEY_ID, KEY_USER_NAME, KEY_EMAIL, KEY_PASSWORD},//Selecting columns want to query
+                KEY_EMAIL + "=?",
+                new String[]{user.email},//Where clause
+                null, null, null);
 
-        // query the user table
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
-         */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
-                columns,    //columns to return
-                null,        //columns for the WHERE clause
-                null,        //The values for the WHERE clause
-                null,       //group the rows
-                null,       //filter by row groups
-                sortOrder); //The sort order
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            //if cursor has value then in user database there is user associated with this given email
+            User user1 = new User(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
 
-
-        // Traversing through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                User user = new User();
-                user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
-                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
-                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
-                // Adding user record to list
-                userList.add(user);
-            } while (cursor.moveToNext());
+            //Match both passwords check they are same or not
+            if (user.password.equalsIgnoreCase(user1.password)) {
+                return user1;
+            }
         }
-        cursor.close();
-        db.close();
 
-        // return user list
-        return userList;
+        //if user password does not matches or there is no record with that email then return @false
+        return null;
     }
 
-    /**
-     * This method to update user record
-     *
-     * @param user
-     */
-    public void updateUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, user.getName());
-        values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
-
-        // updating row
-        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getId())});
-        db.close();
-    }
-
-    /**
-     * This method is to delete user record
-     *
-     * @param user
-     */
-    public void deleteUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by id
-        db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getId())});
-        db.close();
-    }
-
-    /**
-     * This method to check user exist or not
-     *
-     * @param email
-     * @return true/false
-     */
-    public boolean checkUser(String email) {
-
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_USER_ID
-        };
+    public boolean isEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,// Selecting Table
+                new String[]{KEY_ID, KEY_USER_NAME, KEY_EMAIL, KEY_PASSWORD},//Selecting columns want to query
+                KEY_EMAIL + "=?",
+                new String[]{email},//Where clause
+                null, null, null);
 
-        // selection criteria
-        String selection = COLUMN_USER_EMAIL + " = ?";
-
-        // selection argument
-        String[] selectionArgs = {email};
-
-        // query user table with condition
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
-         */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                      //filter by row groups
-                null);                      //The sort order
-        int cursorCount = cursor.getCount();
-        cursor.close();
-        db.close();
-
-        if (cursorCount > 0) {
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            //if cursor has value then in user database there is user associated with this given email so return true
             return true;
         }
 
-        return false;
-    }
-
-    /**
-     * This method to check user exist or not
-     *
-     * @param email
-     * @param password
-     * @return true/false
-     */
-    public boolean checkUser(String email, String password) {
-
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_USER_ID
-        };
-        SQLiteDatabase db = this.getReadableDatabase();
-        // selection criteria
-        String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
-
-        // selection arguments
-        String[] selectionArgs = {email, password};
-
-        // query user table with conditions
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
-         */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                       //filter by row groups
-                null);                      //The sort order
-
-        int cursorCount = cursor.getCount();
-
-        cursor.close();
-        db.close();
-        if (cursorCount > 0) {
-            return true;
-        }
-
+        //if email does not exist return false
         return false;
     }
 }

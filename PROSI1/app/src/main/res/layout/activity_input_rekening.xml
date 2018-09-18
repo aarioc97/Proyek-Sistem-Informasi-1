@@ -70,8 +70,7 @@
                 android:id="@+id/et_no_rek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input Nomor Rekening"
-                android:inputType="number"/>
+                android:hint="Input Nomor Rekening"/>
 
         </android.support.design.widget.TextInputLayout>
 

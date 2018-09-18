@@ -1,6 +1,7 @@
 package com.example.user.prosi_1;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -9,116 +10,129 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.user.prosi_1.R;
 import com.example.user.prosi_1.InputValidation;
 import com.example.user.prosi_1.DatabaseHelper;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private final AppCompatActivity activity = LoginActivity.this;
+public class LoginActivity extends AppCompatActivity {
 
-    private NestedScrollView nestedScrollView;
+    EditText editTextEmail;
+    EditText editTextPassword;
 
-    private TextInputLayout textInputLayoutEmail;
-    private TextInputLayout textInputLayoutPassword;
+    //Declaration TextInputLayout
+    TextInputLayout textInputLayoutEmail;
+    TextInputLayout textInputLayoutPassword;
 
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
+    //Declaration Button
+    Button buttonLogin;
 
-    private AppCompatButton appCompatButtonLogin;
-
-    private InputValidation inputValidation;
-    private DatabaseHelper databaseHelper;
+    //Declaration SqliteHelper
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        getSupportActionBar().hide();
-
+        databaseHelper = new DatabaseHelper(this);
         initViews();
-        initListeners();
-        initObjects();
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Check user input is correct or not
+                if (validate()) {
+
+                    //Get values from EditText fields
+                    String Email = editTextEmail.getText().toString();
+                    String Password = editTextPassword.getText().toString();
+
+                    //Authenticate user
+                    User currentUser = databaseHelper.Authenticate(new User(null, null, Email, Password));
+
+                    //Check Authentication is successful or not
+                    if (currentUser != null) {
+                        Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
+
+                        //User Logged in Successfully Launch You home screen activity
+                        Intent intent=new Intent(LoginActivity.this, Home.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+
+                        //User Logged in Failed
+                        Snackbar.make(buttonLogin, "Failed to log in , please try again", Snackbar.LENGTH_LONG).show();
+
+                    }
+                }
+            }
+        });
+
+
     }
 
-    /**
-     * This method is to initialize views
-     */
+    //this method is used to connect XML views to its Objects
     private void initViews() {
-
-        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
-
-        textInputEditTextEmail = (TextInputEditText) findViewById(R.id.et_username_login);
-        textInputEditTextPassword = (TextInputEditText) findViewById(R.id.et_password_login);
-
-        appCompatButtonLogin = (AppCompatButton) findViewById(R.id.btn_login_to_app);
-    }
-
-    /**
-     * This method is to initialize listeners
-     */
-    private void initListeners() {
-        appCompatButtonLogin.setOnClickListener(this);
-    }
-
-    /**
-     * This method is to initialize objects to be used
-     */
-    private void initObjects() {
-        databaseHelper = new DatabaseHelper(activity);
-        inputValidation = new InputValidation(activity);
+        editTextEmail = (EditText) findViewById(R.id.et_username_login);
+        editTextPassword = (EditText) findViewById(R.id.et_password_login);
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutUsername);
+        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
+        buttonLogin = (Button) findViewById(R.id.btn_login_to_app);
 
     }
 
-    /**
-     * This implemented method is to listen the click on view
-     *
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_login_to_app:
-                verifyFromSQLite();
-                break;
-        }
-    }
-
-    /**
-     * This method is to validate the input text fields and verify login credentials from SQLite
-     */
-    private void verifyFromSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
-            return;
-        }
-
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
-
-
-            Intent accountsIntent = new Intent(activity, Home.class);
-            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
-            emptyInputEditText();
-            startActivity(accountsIntent);
-
-
+    //This method is for handling fromHtml method deprecation
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html) {
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
         } else {
-            // Snack Bar to show success message that record is wrong
-            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+            result = Html.fromHtml(html);
         }
+        return result;
     }
 
-    /**
-     * This method is to empty all input edit text
-     */
-    private void emptyInputEditText() {
-        textInputEditTextEmail.setText(null);
-        textInputEditTextPassword.setText(null);
+    //This method is used to validate input given by user
+    public boolean validate() {
+        boolean valid = false;
+
+        //Get values from EditText fields
+        String Email = editTextEmail.getText().toString();
+        String Password = editTextPassword.getText().toString();
+
+        //Handling validation for Email field
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+            valid = false;
+            textInputLayoutEmail.setError("Please enter valid email!");
+        } else {
+            valid = true;
+            textInputLayoutEmail.setError(null);
+        }
+
+        //Handling validation for Password field
+        if (Password.isEmpty()) {
+            valid = false;
+            textInputLayoutPassword.setError("Please enter valid password!");
+        } else {
+            if (Password.length() > 5) {
+                valid = true;
+                textInputLayoutPassword.setError(null);
+            } else {
+                valid = false;
+                textInputLayoutPassword.setError("Password is to short!");
+            }
+        }
+
+        return valid;
     }
 }

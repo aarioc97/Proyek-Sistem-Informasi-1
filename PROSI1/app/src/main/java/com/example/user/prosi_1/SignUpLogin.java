@@ -39,12 +39,10 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         if(view.getId() == logins.getId()){
             Intent intent1 = new Intent(this, LoginActivity.class);
-            this.finish();
             startActivity(intent1);
         }
         if(view.getId() == signUp.getId()){
-            Intent intent2 = new Intent(this, SignUp.class);
-            this.finish();
+            Intent intent2 = new Intent(this, RegisterActivity.class);
             startActivity(intent2);
         }
     }
