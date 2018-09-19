@@ -5,8 +5,9 @@
     <ImageView
         android:id="@+id/iv_barang"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/icon_pesawat"/>
 
@@ -29,14 +30,5 @@
         android:layout_below="@id/tv_status_req"
         android:text="@string/tutorial_trv"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:backgroundTint="@color/colorPrimary"
-        android:src="@android:drawable/ic_input_add"/>
 
 </RelativeLayout>
