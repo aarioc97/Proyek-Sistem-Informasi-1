@@ -17,6 +17,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //TABLE NAME
     public static final String TABLE_USERS = "users";
 
+    //TABLE NAME
+    public static final String TABLE_BANK = "Bank";
+
     //TABLE USERS COLUMNS
     //ID COLUMN @primaryKey
     public static final String KEY_ID = "id";
@@ -47,6 +50,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //SQL for creating users table
     public static final String SQL_TABLE_USERS = " CREATE TABLE " + TABLE_USERS
+            + " ( "
+            + KEY_ID + " INTEGER PRIMARY KEY, "
+            + KEY_USER_NAME + " TEXT, "
+            + KEY_EMAIL + " TEXT, "
+            + KEY_ADMIN + " TEXT, "
+            + KEY_PASSWORD + " TEXT, "
+            + KEY_TOKEN + " TEXT, "
+            + KEY_CREATE+ " TEXT, "
+            + KEY_UPDATE + " TEXT, "
+            + KEY_DELETE + " TEXT"
+            + " ) ";
+
+    //SQL for creating users table
+    public static final String SQL_TABLE_BANK = " CREATE TABLE " + TABLE_BANK
             + " ( "
             + KEY_ID + " INTEGER PRIMARY KEY, "
             + KEY_USER_NAME + " TEXT, "
