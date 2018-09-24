@@ -45,4 +45,6 @@
     2. Isi keterangan-keterangan detail barang yang wajib dan diperlukan.\n\n
     3. Setelah semua data lengkap, klik tombol "Post".\n\n
     4. Akan muncul notifikasi bahwa penawaran barang ready stock Anda sudah dipost.</string>
+    <string name="post_barang_request">Post Barang Request</string>
+    <string name="post_barang_ready_stock">Post Barang Ready Stock</string>
 </resources>
