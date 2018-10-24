@@ -54,7 +54,7 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_hp_daftar"
+                android:id="@+id/et_email_daftar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
