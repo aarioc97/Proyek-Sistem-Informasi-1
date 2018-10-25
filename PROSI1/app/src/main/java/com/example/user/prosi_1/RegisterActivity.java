@@ -66,9 +66,9 @@ public class RegisterActivity extends AppCompatActivity{
         this.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userName = editTextUserName.getText().toString();
-                String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
+                final String userName = editTextUserName.getText().toString();
+                final String email = editTextEmail.getText().toString();
+                final String password = editTextPassword.getText().toString();
 
                 if (userName.isEmpty()) {
                     textInputLayoutUserName.setError("Please enter valid username!");
