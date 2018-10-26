@@ -35,12 +35,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity{
 
     EditText editTextEmail;
     EditText editTextPassword;
+
+    TextInputLayout textInputLayoutEmail;
+    TextInputLayout textInputLayoutPassword;
 
     //Declaration Button
     Button buttonLogin;
@@ -61,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         this.editTextEmail = this.findViewById(R.id.et_email_login);
         this.editTextPassword = this.findViewById(R.id.et_password_login);
+        this.textInputLayoutEmail = this.findViewById(R.id.textInputLayoutEmail);
+        this.textInputLayoutPassword = this.findViewById(R.id.textInputLayoutPassword);
         this.buttonLogin = this.findViewById(R.id.btn_login_to_app);
         this.signInButton = this.findViewById(R.id.btn_signup_google);
 
@@ -71,21 +77,50 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(LoginActivity.this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(LoginActivity.this, this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    textInputLayoutEmail.setError("Please enter valid email!");
+                } else {
+                    textInputLayoutEmail.setError(null);
+                }
+
+                if (password.isEmpty()) {
+                    textInputLayoutPassword.setError("Please enter valid password!");
+                } else if (password.length() > 5) {
+                    textInputLayoutPassword.setError(null);
+                } else {
+                    textInputLayoutPassword.setError("Password is to short!");
+                }
+
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            startActivity(new Intent(getApplicationContext(),Home.class));
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
+    }
 
-        if(firebaseAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),Home.class));
-        }
+//        if(firebaseAuth.getCurrentUser()!=null){
+//            startActivity(new Intent(getApplicationContext(),Home.class));
+//        }
 
 //        databaseHelper = new DatabaseHelper(this);
 //        initViews();
@@ -122,48 +157,48 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 //                }
 //            }
 //        });
-
-
-    }
-
-    private void signIn() {
-        Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signIntent,RC_SIGN_IN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RC_SIGN_IN){
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()){
-                GoogleSignInAccount account = result.getSignInAccount();
-                authWithGoogle(account);
-            }
-        }
-    }
-
-    private void authWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    startActivity(new Intent(getApplicationContext(),Home.class));
-                    finish();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Auth Error",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+//
+//
+//    }
+//
+//    private void signIn() {
+//        Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        startActivityForResult(signIntent,RC_SIGN_IN);
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode==RC_SIGN_IN){
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            if(result.isSuccess()){
+//                GoogleSignInAccount account = result.getSignInAccount();
+//                authWithGoogle(account);
+//            }
+//        }
+//    }
+//
+//    private void authWithGoogle(GoogleSignInAccount account) {
+//        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+//        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if(task.isSuccessful()){
+//                    startActivity(new Intent(getApplicationContext(),Home.class));
+//                    finish();
+//                }
+//                else{
+//                    Toast.makeText(getApplicationContext(),"Auth Error",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//    }
+//
+//
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//    }
 
 //    //this method is used to connect XML views to its Objects
 //    private void initViews() {
