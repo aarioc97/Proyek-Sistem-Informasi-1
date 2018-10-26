@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,21 +47,23 @@ public class LoginActivity extends AppCompatActivity{
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
 
-    //Declaration Button
     Button buttonLogin;
     SignInButton signInButton;
-
-    private static final int RC_SIGN_IN = 9001;
+    ProgressBar pbLogin;
 
     FirebaseAuth firebaseAuth;
-    GoogleApiClient mGoogleApiClient;
-
-    //Declaration SqliteHelper
-//    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.firebaseAuth = FirebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, Home.class));
+            finish();
+        }
+
         setContentView(R.layout.activity_login_page);
 
         this.editTextEmail = this.findViewById(R.id.et_email_login);
@@ -69,24 +72,17 @@ public class LoginActivity extends AppCompatActivity{
         this.textInputLayoutPassword = this.findViewById(R.id.textInputLayoutPassword);
         this.buttonLogin = this.findViewById(R.id.btn_login_to_app);
         this.signInButton = this.findViewById(R.id.btn_signup_google);
+        this.pbLogin = this.findViewById(R.id.pb_login);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+        this.pbLogin.setVisibility(View.GONE);
 
-//        mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .enableAutoManage(LoginActivity.this, this)
-//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//                .build();
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        this.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
+                final String password = editTextPassword.getText().toString();
 
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     textInputLayoutEmail.setError("Please enter valid email!");
@@ -102,157 +98,32 @@ public class LoginActivity extends AppCompatActivity{
                     textInputLayoutPassword.setError("Password is to short!");
                 }
 
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            startActivity(new Intent(getApplicationContext(),Home.class));
-                            finish();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                pbLogin.setVisibility(View.VISIBLE);
+
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                pbLogin.setVisibility(View.GONE);
+                                if (!task.isSuccessful()) {
+                                    // there was an error
+                                    if (password.length() < 6) {
+                                        editTextPassword.setError("Password is too short!");
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(LoginActivity.this, Home.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        });
+
             }
         });
     }
-
-//        if(firebaseAuth.getCurrentUser()!=null){
-//            startActivity(new Intent(getApplicationContext(),Home.class));
-//        }
-
-//        databaseHelper = new DatabaseHelper(this);
-//        initViews();
-//
-//        buttonLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //Check user input is correct or not
-//                if (validate()) {
-//
-//                    //Get values from EditText fields
-//                    String Email = editTextEmail.getText().toString();
-//                    String Password = editTextPassword.getText().toString();
-//
-//                    //Authenticate user
-//                    User currentUser = databaseHelper.Authenticate(new User(null, null, Email, Password));
-//
-//                    //Check Authentication is successful or not
-//                    if (currentUser != null) {
-//                        Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG).show();
-//
-//                        //User Logged in Successfully Launch You home screen activity
-//                        Intent intent=new Intent(LoginActivity.this, Home.class);
-//                        startActivity(intent);
-//                        finish();
-//
-//                    } else {
-//
-//                        //User Logged in Failed
-//                        Snackbar.make(buttonLogin, "Failed to log in , please try again", Snackbar.LENGTH_LONG).show();
-//
-//                    }
-//                }
-//            }
-//        });
-//
-//
-//    }
-//
-//    private void signIn() {
-//        Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-//        startActivityForResult(signIntent,RC_SIGN_IN);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode==RC_SIGN_IN){
-//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-//            if(result.isSuccess()){
-//                GoogleSignInAccount account = result.getSignInAccount();
-//                authWithGoogle(account);
-//            }
-//        }
-//    }
-//
-//    private void authWithGoogle(GoogleSignInAccount account) {
-//        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
-//        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(task.isSuccessful()){
-//                    startActivity(new Intent(getApplicationContext(),Home.class));
-//                    finish();
-//                }
-//                else{
-//                    Toast.makeText(getApplicationContext(),"Auth Error",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//    }
-//
-//
-//    @Override
-//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-//
-//    }
-
-//    //this method is used to connect XML views to its Objects
-//    private void initViews() {
-//        editTextEmail = (EditText) findViewById(R.id.et_username_login);
-//        editTextPassword = (EditText) findViewById(R.id.et_password_login);
-//        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutUsername);
-//        textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
-//        buttonLogin = (Button) findViewById(R.id.btn_login_to_app);
-//
-//    }
-//
-//    //This method is for handling fromHtml method deprecation
-//    @SuppressWarnings("deprecation")
-//    public static Spanned fromHtml(String html) {
-//        Spanned result;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
-//        } else {
-//            result = Html.fromHtml(html);
-//        }
-//        return result;
-//    }
-//
-//    //This method is used to validate input given by user
-//    public boolean validate() {
-//        boolean valid = false;
-//
-//        //Get values from EditText fields
-//        String Email = editTextEmail.getText().toString();
-//        String Password = editTextPassword.getText().toString();
-//
-//        //Handling validation for Email field
-//        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-//            valid = false;
-//            textInputLayoutEmail.setError("Please enter valid email!");
-//        } else {
-//            valid = true;
-//            textInputLayoutEmail.setError(null);
-//        }
-//
-//        //Handling validation for Password field
-//        if (Password.isEmpty()) {
-//            valid = false;
-//            textInputLayoutPassword.setError("Please enter valid password!");
-//        } else {
-//            if (Password.length() > 5) {
-//                valid = true;
-//                textInputLayoutPassword.setError(null);
-//            } else {
-//                valid = false;
-//                textInputLayoutPassword.setError("Password is to short!");
-//            }
-//        }
-//
-//        return valid;
-//    }
 }

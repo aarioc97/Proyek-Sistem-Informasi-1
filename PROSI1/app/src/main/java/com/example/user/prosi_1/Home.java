@@ -82,7 +82,8 @@ public class Home extends AppCompatActivity{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, AccountSettings.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
