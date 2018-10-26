@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fdfdfe">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fdfdfe">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -26,35 +32,44 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-        <TextView
-            android:id="@+id/tv_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1. Detail Barang"
-            android:textSize="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/appbar"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-        <TextView
-            android:id="@+id/req_spec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apa yang ingin kamu beli?"
-            android:textSize="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_below="@id/tv_detail"/>
 
-        <ImageView
-            android:id="@+id/iv_canvas_req"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/req_spec"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:maxWidth="@dimen/activity_horizontal_margin"
-            android:maxHeight="200dp"
-            android:background="@color/colorPrimary"/>
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="1. Detail Barang"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/req_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_detail"
+        android:layout_marginLeft="30dp"
+        android:text="Apa yang ingin kamu beli?"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/iv_canvas_req"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/req_spec"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:maxWidth="@dimen/activity_horizontal_margin"
+        android:maxHeight="200dp" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_desc"
@@ -68,8 +83,116 @@
             android:id="@+id/req_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama atau deskripsi barang..."/>
+            android:hint="Nama barang" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/quantity"
+        android:text="Quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/til_desc"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/til_desc"
+        android:layout_toRightOf="@id/quantity"
+        android:layout_marginLeft="150dp">
+
+        <EditText
+            android:id="@+id/kuantitas"
+            android:hint="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/deskripsi"
+        android:text="Deskripsi Barang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quantity"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/deskripsi_singkat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deskripsi"
+        android:layout_marginLeft="25dp">
+
+        <EditText
+            android:hint="deskripsi singkat untuk barang anda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_info_barang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deskripsi_singkat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="2. Info Lokasi Barang"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_beli_dari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_barang"
+        android:layout_marginLeft="30dp"
+        android:text="Beli Dari:"
+        android:textSize="15dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_info_barang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_beli_dari"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="toko tempat barang akan dibeli" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_kirim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/til_info_barang"
+        android:layout_marginLeft="30dp"
+        android:text="Kirim dari kota:"
+        android:textSize="15dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_kirim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_kirim"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="kota anda" />
 
     </android.support.design.widget.TextInputLayout>
 
     </RelativeLayout>
+
+</ScrollView>
+

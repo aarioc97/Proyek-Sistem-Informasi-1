@@ -35,8 +35,8 @@ public class TabRequester extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(postReq.getId() == view.getId()){
-//            Intent intent1 = new Intent(this, PostBarang.class);
-//            startActivity(intent1);
+        //   Intent intent1 = new Intent(this, PostBarang.class);
+          // startActivity(intent1);
         }
     }
 }

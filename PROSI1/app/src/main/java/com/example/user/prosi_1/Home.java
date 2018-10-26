@@ -27,7 +27,7 @@ import com.example.user.prosi_1.home_tabs.TabHome;
 import com.example.user.prosi_1.home_tabs.TabRequester;
 import com.example.user.prosi_1.home_tabs.TabTraveller;
 
-public class Home extends AppCompatActivity{
+public class Home extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity{
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    Button requestPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class Home extends AppCompatActivity{
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        requestPage = this.findViewById(R.id.btn_post_req);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
@@ -89,7 +92,15 @@ public class Home extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-        /**
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == requestPage.getId()){
+            Intent intent = new Intent(this, PostBarang.class);
+            startActivity(intent);
+        }
+    }
+
+    /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
@@ -145,4 +156,5 @@ public class Home extends AppCompatActivity{
         }, 3000);
         backTwice = true;
     }
+
 }
