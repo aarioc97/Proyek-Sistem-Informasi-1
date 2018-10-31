@@ -61,6 +61,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         requestPage = this.findViewById(R.id.btn_post_req);
+        //jangan dipakai dulu, kalau dipakai pas login crash
+        //requestPage.setOnClickListener(this);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
@@ -94,7 +96,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == requestPage.getId()){
+        if(v == requestPage){
             Intent intent = new Intent(this, PostBarang.class);
             startActivity(intent);
         }
