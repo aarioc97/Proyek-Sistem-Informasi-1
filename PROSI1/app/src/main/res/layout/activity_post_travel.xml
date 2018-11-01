@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView02"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fdfdfe">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/appbar_padding_top"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Post Trip">
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appbar"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="1. Post Trip"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/req_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_detail"
+            android:layout_marginLeft="30dp"
+            android:text="Negara mana yang akan kamu tuju?"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/et_negara"
+            android:layout_below="@id/req_spec"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Negara"/>
+
+        <TextView
+            android:id="@+id/tv_tanggal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_negara"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="2. Tanggal Pergi"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/req_ket1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_tanggal1"
+            android:layout_marginLeft="30dp"
+            android:text="Tanggal berapa kamu pergi?"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/et_tanggal1"
+            android:layout_below="@id/req_ket1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/tv_tanggal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_tanggal1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="3. Tanggal Kembali"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/req_ket2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_tanggal2"
+            android:layout_marginLeft="30dp"
+            android:text="Tanggal berapa kamu kembali?"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/et_tanggal2"
+            android:layout_below="@id/req_ket2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_tanggal2"
+            android:text="Post"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="100dp"/>
+
+    </RelativeLayout>
+
+</ScrollView>

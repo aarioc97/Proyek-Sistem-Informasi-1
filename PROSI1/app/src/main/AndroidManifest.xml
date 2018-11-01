@@ -32,7 +32,8 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".AccountSettings" />
-        <activity android:name=".Chat"></activity>
+        <activity android:name=".Chat" />
+        <activity android:name=".PostTravel"></activity>
     </application>
 
 </manifest>
