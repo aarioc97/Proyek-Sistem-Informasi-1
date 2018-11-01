@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity{
                         textInputLayoutPassword.setError("Password is to short!");
                     }
                 }
+
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

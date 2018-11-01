@@ -84,27 +84,29 @@
         android:textSize="20dp"
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/tv_login_choose"/>
-
-    <TextView
-        android:id="@+id/tv_login_choose"
-        android:textSize="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="...or login with Google"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/btn_signup_google"
-        android:layout_margin="15dp"/>
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_signup_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="50dp"/>
+        <!--android:layout_above="@id/tv_login_choose"/>-->
 
-    </com.google.android.gms.common.SignInButton>
+    <!--<TextView-->
+        <!--android:id="@+id/tv_login_choose"-->
+        <!--android:textSize="15dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="...or login with Google"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_above="@id/btn_signup_google"-->
+        <!--android:layout_margin="15dp"/>-->
+
+    <!--<com.google.android.gms.common.SignInButton-->
+        <!--android:id="@+id/btn_signup_google"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="20dp">-->
+
+    <!--</com.google.android.gms.common.SignInButton>-->
 
 
 </RelativeLayout>
