@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity{
         this.textInputLayoutEmail = this.findViewById(R.id.textInputLayoutEmail);
         this.textInputLayoutPassword = this.findViewById(R.id.textInputLayoutPassword);
         this.buttonLogin = this.findViewById(R.id.btn_login_to_app);
-        this.signInButton = this.findViewById(R.id.btn_signup_google);
+//        this.signInButton = this.findViewById(R.id.btn_signup_google);
         this.pbLogin = this.findViewById(R.id.pb_login);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
@@ -86,43 +86,36 @@ public class LoginActivity extends AppCompatActivity{
 
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     textInputLayoutEmail.setError("Please enter valid email!");
-                } else {
-                    textInputLayoutEmail.setError(null);
-                }
-
-                if (password.isEmpty()) {
+                } else if (password.isEmpty()) {
                     textInputLayoutPassword.setError("Please enter valid password!");
-                } else if (password.length() > 5) {
-                    textInputLayoutPassword.setError(null);
-                } else {
+                } else if (password.length() < 5) {
                     textInputLayoutPassword.setError("Password is to short!");
-                }
-
-                pbLogin.setVisibility(View.VISIBLE);
-
-                firebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                pbLogin.setVisibility(View.GONE);
-                                if (!task.isSuccessful()) {
-                                    // there was an error
-                                    if (password.length() < 6) {
-                                        editTextPassword.setError("Password is too short!");
+                } else {
+                    textInputLayoutPassword.setError(null);
+                    pbLogin.setVisibility(View.VISIBLE);
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                    // the auth state listener will be notified and logic to handle the
+                                    // signed in user can be handled in the listener.
+                                    pbLogin.setVisibility(View.GONE);
+                                    if (!task.isSuccessful()) {
+                                        // there was an error
+                                        if (password.length() < 6) {
+                                            editTextPassword.setError("Password is too short!");
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
+                                        }
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(LoginActivity.this, Home.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
-                                } else {
-                                    Intent intent = new Intent(LoginActivity.this, Home.class);
-                                    startActivity(intent);
-                                    finish();
                                 }
-                            }
-                        });
-
+                            });
+                }
             }
         });
     }
