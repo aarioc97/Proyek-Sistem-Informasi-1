@@ -47,4 +47,8 @@
     4. Akan muncul notifikasi bahwa penawaran barang ready stock Anda sudah dipost.</string>
     <string name="post_barang_request">Post Barang Request</string>
     <string name="post_barang_ready_stock">Post Barang Ready Stock</string>
+    <string name="title_activity_home3">Fly \'n\' Buy</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
