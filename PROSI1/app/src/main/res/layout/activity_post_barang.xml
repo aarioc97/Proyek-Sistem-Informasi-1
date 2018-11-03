@@ -103,12 +103,110 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:id="@+id/deskripsi"
+            android:id="@+id/tv_berat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/quantity"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
+            android:text="Berat" />
+
+        <EditText
+            android:id="@+id/et_berat"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quantity"
+            android:layout_marginLeft="150dp"
+            android:layout_toRightOf="@id/quantity"
+            android:hint="0" />
+
+        <TextView
+            android:id="@+id/tv_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quantity"
+            android:layout_toRightOf="@id/et_berat"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Kg" />
+
+        <TextView
+            android:id="@+id/tv_panjang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_berat"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Panjang" />
+
+        <EditText
+            android:id="@+id/et_panjang"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_berat"
+            android:layout_marginLeft="150dp"
+            android:layout_toRightOf="@id/quantity"
+            android:hint="0" />
+
+        <TextView
+            android:id="@+id/tv_cm1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_kg"
+            android:layout_toRightOf="@id/et_berat"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Cm" />
+
+        <TextView
+            android:id="@+id/tv_lebar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_panjang"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Lebar" />
+
+        <EditText
+            android:id="@+id/et_lebar"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_panjang"
+            android:layout_marginLeft="150dp"
+            android:layout_toRightOf="@id/quantity"
+            android:hint="0" />
+
+        <TextView
+            android:id="@+id/tv_cm2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_cm1"
+            android:layout_toRightOf="@id/et_berat"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Cm" />
+
+        <TextView
+            android:id="@+id/tv_status_pecah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lebar"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:text="Status Pecah Belah" />
+
+
+
+        <TextView
+            android:id="@+id/deskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_status_pecah"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="40dp"
             android:text="Deskripsi Barang" />
 
         <android.support.design.widget.TextInputLayout
@@ -230,7 +328,8 @@
                 android:id="@+id/et_harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="harga jual" />
+                android:hint="harga jual"
+                android:inputType="number"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -376,6 +475,16 @@
             android:text="Post"
             android:layout_centerInParent="true"
             android:layout_marginTop="100dp"/>
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="473dp"
+            android:layout_marginEnd="116dp"
+            android:text="Ya" />
 
 
     </RelativeLayout>
