@@ -2,6 +2,8 @@ package basepackage;
 
 import android.media.Image;
 
+import com.google.firebase.storage.StorageReference;
+
 /**
  * Created by user on 06/05/2018.
  */
@@ -23,13 +25,14 @@ public class BarangPostRequest extends Requester {
     int panjang;
     int lebar;
     Image foto;
+    StorageReference rf;
 
-    public BarangPostRequest(int berat,String deskripsi,Image foto, int harga, int lebar,
+    public BarangPostRequest(int berat,String deskripsi,StorageReference foto, int harga, int lebar,
                              String namaBarang, int panjang, String statusPecahBelah,int jumlahPR){
 
         this.berat = berat;
         this.deskripsi = deskripsi;
-        this.foto = foto;
+        this.rf = foto;
         this.harga = harga;
         this.kodeBarang = "Request";
         this.lebar = lebar;
