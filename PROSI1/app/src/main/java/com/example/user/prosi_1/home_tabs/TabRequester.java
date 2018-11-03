@@ -19,24 +19,23 @@ import com.example.user.prosi_1.R;
  * Created by user on 12/09/2018.
  */
 
-public class TabRequester extends Fragment implements View.OnClickListener{
+public class TabRequester extends Fragment{
 
-    private Button postReq;
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_requester, container, false);
-        postReq = (Button) view.findViewById(R.id.btn_post_req);
-        postReq.setOnClickListener(this);
+
+        Button postReq = (Button) view.findViewById(R.id.btn_post_req);
+        postReq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PostBarang.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
         return view;
+
     }
 
-    @Override
-    public void onClick(View view) {
-        if(postReq.getId() == view.getId()){
-        //   Intent intent1 = new Intent(this, PostBarang.class);
-          // startActivity(intent1);
-        }
-    }
 }

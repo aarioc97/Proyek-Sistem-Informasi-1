@@ -3,10 +3,8 @@ package com.example.user.prosi_1;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,16 +13,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -46,8 +38,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
     private final int PICK_IMAGE_REQUEST = 71;
 
     //Firebase
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference = storage.getReference();;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +68,8 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
         calculate.setOnClickListener(this);
         iv_barang.setOnClickListener(this);
+
+        storageReference = FirebaseStorage.getInstance().getReference();
 
     }
 
@@ -127,7 +120,6 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
                 this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
                 ref.putFile(filePath);
             }
-
 
             BarangPostRequest barang = new BarangPostRequest(beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
                     panjangBarang,statusBarang,kuantitasBarang);
