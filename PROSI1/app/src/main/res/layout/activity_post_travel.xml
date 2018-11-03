@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:hint=""
             android:inputType="date" />
-
+        
         <TextView
             android:id="@+id/tv_tanggal2"
             android:layout_width="wrap_content"
