@@ -68,6 +68,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
         calculate.setOnClickListener(this);
         iv_barang.setOnClickListener(this);
+        post.setOnClickListener(this);
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -82,9 +83,9 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
             int totalFeeCalculated = hargaCalculated + adminFeeCalculated + ongkirFeeCalculated;
 
-            adminFee.setText(adminFeeCalculated);
-            ongkirFee.setText(ongkirFeeCalculated);
-            totalFee.setText(totalFeeCalculated);
+            adminFee.setText(""+adminFeeCalculated);
+            ongkirFee.setText(""+ongkirFeeCalculated);
+            totalFee.setText(""+totalFeeCalculated);
         }
         if (v == iv_barang){
             Intent intent = new Intent();
@@ -111,15 +112,8 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
             int kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
 
-            if(filePath != null)
-            {
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
-
-                this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
-                ref.putFile(filePath);
-            }
+            this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath);
 
             BarangPostRequest barang = new BarangPostRequest(beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
                     panjangBarang,statusBarang,kuantitasBarang);

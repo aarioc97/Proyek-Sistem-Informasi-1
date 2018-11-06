@@ -63,44 +63,33 @@
             android:maxWidth="@dimen/activity_horizontal_margin"
             android:maxHeight="200dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_desc"
+        <EditText
+            android:id="@+id/et_nama_barang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Nama barang"
             android:layout_below="@id/iv_canvas_req"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_nama_barang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nama barang" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:layout_marginRight="20dp"/>
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/til_desc"
+            android:layout_below="@id/et_nama_barang"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="15dp"
             android:text="Quantity" />
 
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/et_kuantitas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/til_desc"
+            android:hint="0"
+            android:layout_below="@id/et_nama_barang"
             android:layout_marginLeft="150dp"
-            android:layout_toRightOf="@id/quantity">
-
-            <EditText
-                android:id="@+id/et_kuantitas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="0" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_toRightOf="@id/quantity"
+            android:inputType="number"/>
 
         <TextView
             android:id="@+id/tv_berat"
@@ -119,7 +108,8 @@
             android:layout_below="@id/quantity"
             android:layout_marginLeft="150dp"
             android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
+            android:hint="0"
+            android:inputType="number"/>
 
         <TextView
             android:id="@+id/tv_kg"
@@ -148,7 +138,8 @@
             android:layout_below="@id/tv_berat"
             android:layout_marginLeft="150dp"
             android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
+            android:hint="0"
+            android:inputType="number"/>
 
         <TextView
             android:id="@+id/tv_cm1"
@@ -177,7 +168,8 @@
             android:layout_below="@id/tv_panjang"
             android:layout_marginLeft="150dp"
             android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
+            android:hint="0"
+            android:inputType="number"/>
 
         <TextView
             android:id="@+id/tv_cm2"
@@ -198,8 +190,6 @@
             android:layout_marginTop="25dp"
             android:text="Status Pecah Belah" />
 
-
-
         <TextView
             android:id="@+id/deskripsi"
             android:layout_width="wrap_content"
@@ -209,25 +199,19 @@
             android:layout_marginTop="40dp"
             android:text="Deskripsi Barang" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/deskripsi_singkat"
+        <EditText
+            android:id="@+id/et_deskripsi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/deskripsi"
-            android:layout_marginLeft="25dp">
-
-            <EditText
-                android:id="@+id/et_deskripsi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="deskripsi singkat untuk barang anda" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_marginLeft="25dp"
+            android:hint="deskripsi singkat untuk barang anda" />
 
         <TextView
             android:id="@+id/tv_info_barang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/deskripsi_singkat"
+            android:layout_below="@+id/et_deskripsi"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:text="2. Info Lokasi Barang"
@@ -314,25 +298,17 @@
             android:text="Rp."
             android:textSize="15dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_harga_barang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga_barang"
-            android:layout_toRightOf="@id/tv_rp1"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="20dp">
-
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/et_harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="harga jual"
-                android:inputType="number"/>
-
-        </android.support.design.widget.TextInputLayout>
-
+                android:inputType="number"
+                android:layout_below="@id/tv_harga_barang"
+                android:layout_toRightOf="@id/tv_rp1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"/>
 
         <TextView
             android:id="@+id/tv_admin"
@@ -348,7 +324,7 @@
             android:id="@+id/tv_rp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga"
+            android:layout_below="@id/tv_rp1"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/tv_admin"
