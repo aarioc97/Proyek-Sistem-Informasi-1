@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
     <RelativeLayout
-
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fdfdfe">
@@ -15,456 +14,452 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/appbar_padding_top"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_weight="1"
-                android:background="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Post Request">
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:title="Post Request"
+                app:titleTextColor="#ffff">
 
             </android.support.v7.widget.Toolbar>
+
         </android.support.design.widget.AppBarLayout>
 
-
         <TextView
-            android:id="@+id/tv_detail"
+            android:id="@+id/tv_num_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/appbar"
+            android:layout_below="@id/appbar"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="1. Detail Barang"
+            android:text="1."
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/req_spec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_detail"
-            android:layout_marginLeft="30dp"
-            android:text="Apa yang ingin kamu beli?"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/iv_canvas_req"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/req_spec"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:maxWidth="@dimen/activity_horizontal_margin"
-            android:maxHeight="200dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_desc"
+        <LinearLayout
+            android:id="@+id/ll_num_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_canvas_req"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_nama_barang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nama barang" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/til_desc"
-            android:layout_marginLeft="25dp"
+            android:layout_below="@id/appbar"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
-            android:text="Quantity" />
+            android:layout_toRightOf="@id/tv_num_1"
+            android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/til_desc"
-            android:layout_marginLeft="150dp"
-            android:layout_toRightOf="@id/quantity">
-
-            <EditText
-                android:id="@+id/et_kuantitas"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="0" />
-        </android.support.design.widget.TextInputLayout>
+                android:text="Detail Barang"
+                android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tv_berat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/quantity"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Berat" />
-
-        <EditText
-            android:id="@+id/et_berat"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/quantity"
-            android:layout_marginLeft="150dp"
-            android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
-
-        <TextView
-            android:id="@+id/tv_kg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/quantity"
-            android:layout_toRightOf="@id/et_berat"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Kg" />
-
-        <TextView
-            android:id="@+id/tv_panjang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_berat"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Panjang" />
-
-        <EditText
-            android:id="@+id/et_panjang"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_berat"
-            android:layout_marginLeft="150dp"
-            android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
-
-        <TextView
-            android:id="@+id/tv_cm1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_kg"
-            android:layout_toRightOf="@id/et_berat"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Cm" />
-
-        <TextView
-            android:id="@+id/tv_lebar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_panjang"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Lebar" />
-
-        <EditText
-            android:id="@+id/et_lebar"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_panjang"
-            android:layout_marginLeft="150dp"
-            android:layout_toRightOf="@id/quantity"
-            android:hint="0" />
-
-        <TextView
-            android:id="@+id/tv_cm2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_cm1"
-            android:layout_toRightOf="@id/et_berat"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Cm" />
-
-        <TextView
-            android:id="@+id/tv_status_pecah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_lebar"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:text="Status Pecah Belah" />
-
-
-
-        <TextView
-            android:id="@+id/deskripsi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_status_pecah"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="40dp"
-            android:text="Deskripsi Barang" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/deskripsi_singkat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/deskripsi"
-            android:layout_marginLeft="25dp">
-
-            <EditText
-                android:id="@+id/et_deskripsi"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="deskripsi singkat untuk barang anda" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="5dp"
+                android:text="Apa yang ingin kamu beli?"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/iv_canvas_req"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:src="@drawable/icon_gallery" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_nama_barang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="nama barang" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity" />
+
+                <EditText
+                    android:id="@+id/et_kuantitas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Berat" />
+
+                <EditText
+                    android:id="@+id/et_berat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kg" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Panjang" />
+
+                <EditText
+                    android:id="@+id/et_panjang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lebar" />
+
+                <EditText
+                    android:id="@+id/et_lebar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_status_pecah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status Pecah Belah" />
+
+                <CheckBox
+                    android:id="@+id/check_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ya"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi Barang" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/deskripsi_singkat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_deskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="deskripsi singkat untuk barang anda" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_info_barang"
+            android:id="@+id/tv_num_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/deskripsi_singkat"
+            android:layout_below="@id/ll_num_1"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="2. Info Lokasi Barang"
+            android:layout_marginTop="10dp"
+            android:text="2."
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tv_beli_dari"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_info_barang"
-            android:layout_marginLeft="30dp"
-            android:text="Beli Dari:"
-            android:textSize="15dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_info_barang"
+        <LinearLayout
+            android:id="@+id/ll_num_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_beli_dari"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_below="@id/ll_num_1"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tv_num_2"
+            android:orientation="vertical">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/kota_asal"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Info Lokasi Barang"
+                android:textSize="20dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="toko tempat barang akan dibeli" />
+                android:orientation="vertical">
 
-        </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Beli Dari:" />
 
-        <TextView
-            android:id="@+id/tv_kirim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/til_info_barang"
-            android:layout_marginLeft="30dp"
-            android:text="Kirim dari kota:"
-            android:textSize="15dp" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_kirim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_kirim"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/kota_asal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="toko tempat barang akan dibeli" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/kota_tujuan"
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="kota barang yang akan dibeli" />
+                android:orientation="vertical">
 
-        </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kirim dari kota:"
+                    android:textSize="15dp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/kota_tujuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="kota barang yang akan dibeli" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_harga_barang"
+            android:id="@+id/tv_num_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/til_kirim"
+            android:layout_below="@id/ll_num_2"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="3. Harga Barang"
+            android:layout_marginTop="10dp"
+            android:text="3."
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tv_harga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga_barang"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Harga:"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/tv_rp1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga_barang"
-            android:layout_toRightOf="@id/tv_harga"
-            android:layout_marginLeft="77dp"
-            android:layout_marginTop="30dp"
-            android:text="Rp."
-            android:textSize="15dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_harga_barang"
+        <LinearLayout
+            android:id="@+id/ll_num_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga_barang"
-            android:layout_toRightOf="@id/tv_rp1"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/ll_num_2"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tv_num_3"
+            android:orientation="vertical">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/et_harga"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harga Barang"
+                android:textSize="20dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="harga jual"
-                android:inputType="number"/>
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Harga:"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp." />
 
-        <TextView
-            android:id="@+id/tv_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Admin Fee:"
-            android:textSize="15dp" />
+                <EditText
+                    android:id="@+id/et_harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="harga jual"
+                    android:inputType="number"/>
 
-        <TextView
-            android:id="@+id/tv_rp2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="30dp"
-            android:layout_toRightOf="@id/tv_admin"
-            android:text="Rp."
-            android:textSize="15dp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_admin_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_harga"
-            android:layout_toRightOf="@id/tv_rp2"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="30dp"
-            android:text=""
-            android:textSize="15dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_ongkir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_admin"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:text="Ongkir:"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Admin Fee:"/>
 
-        <TextView
-            android:id="@+id/tv_rp3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_admin"
-            android:layout_toRightOf="@id/tv_ongkir"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="30dp"
-            android:text="Rp."
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp."/>
 
-        <TextView
-            android:id="@+id/tv_ongkir_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_admin"
-            android:layout_toRightOf="@id/tv_rp3"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="30dp"
-            android:text=""
-            android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/tv_admin_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text=""/>
 
-        <View
-            android:id="@+id/colored_bar"
-            android:layout_below="@+id/tv_ongkir_fee"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="250dp"
-            android:layout_height="3dp"
-            android:background="@color/colorAccent" />
+            </LinearLayout>
 
-        <View
-            android:id="@+id/plus_bar_1"
-            android:layout_below="@+id/tv_ongkir_fee"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="300dp"
-            android:layout_width="20dp"
-            android:layout_height="3dp"
-            android:background="@color/colorAccent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-        <View
-            android:id="@+id/plus_bar_2"
-            android:layout_below="@+id/tv_ongkir_fee"
-            android:layout_marginTop="21dp"
-            android:layout_marginLeft="309dp"
-            android:layout_width="3dp"
-            android:layout_height="20dp"
-            android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ongkir:"/>
 
-        <TextView
-            android:id="@+id/tv_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/plus_bar_1"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:textStyle="bold"
-            android:text="Total:"
-            android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp."/>
 
-        <TextView
-            android:id="@+id/tv_rp4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/plus_bar_1"
-            android:layout_toRightOf="@id/tv_total"
-            android:layout_marginLeft="82dp"
-            android:layout_marginTop="30dp"
-            android:text="Rp."
-            android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/tv_ongkir_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text=""/>
 
-        <TextView
-            android:id="@+id/tv_total_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/plus_bar_1"
-            android:layout_toRightOf="@id/tv_rp4"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="30dp"
-            android:text=""
-            android:textSize="15dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/colored_bar"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="280dp"
+                    android:layout_height="3dp"
+                    android:background="#707070" />
+
+                <View
+                    android:id="@+id/plus_bar_1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="300dp"
+                    android:layout_width="20dp"
+                    android:layout_height="3dp"
+                    android:background="#707070" />
+
+                <View
+                    android:id="@+id/plus_bar_2"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginLeft="309dp"
+                    android:layout_width="3dp"
+                    android:layout_height="20dp"
+                    android:background="#707070" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total:"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp."/>
+
+                <TextView
+                    android:id="@+id/tv_total_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text=""/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_total"
+            android:layout_below="@+id/ll_num_3"
             android:text="Calculate"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"/>
 
         <Button
@@ -473,21 +468,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_calculate"
             android:text="Post"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="100dp"/>
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="473dp"
-            android:layout_marginEnd="116dp"
-            android:text="Ya" />
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"/>
 
 
     </RelativeLayout>
 
 </ScrollView>
-
