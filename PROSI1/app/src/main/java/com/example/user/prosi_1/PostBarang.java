@@ -64,7 +64,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
         iv_barang = this.findViewById(R.id.iv_canvas_req);
 
-        cb_status = this.findViewById(R.id.checkBox2);
+        cb_status = this.findViewById(R.id.check_box);
 
         calculate.setOnClickListener(this);
         iv_barang.setOnClickListener(this);
