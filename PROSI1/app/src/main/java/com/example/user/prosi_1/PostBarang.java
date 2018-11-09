@@ -33,6 +33,9 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     StorageReference ref;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dbRef = database.getReference();
+
     private Uri filePath;
 
     private final int PICK_IMAGE_REQUEST = 71;
@@ -118,7 +121,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             BarangPostRequest barang = new BarangPostRequest(beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
                     panjangBarang,statusBarang,kuantitasBarang);
 
-            mDatabase.child("barang").setValue(barang);
+            mDatabase.child("barang/"+ UUID.randomUUID().toString()).setValue(barang);
         }
     }
 
