@@ -123,7 +123,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
             ref.putFile(filePath);
 
-            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
+            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang,deskripsiBarang, gambarBarang,hargaBarang,lebarBarang,namaBarang,
                     panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
 
             mDatabase.child("barang").child(idBarang).setValue(barang);

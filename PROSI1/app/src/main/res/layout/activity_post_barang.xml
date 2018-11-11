@@ -98,7 +98,8 @@
                     android:id="@+id/et_kuantitas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="0" />
+                    android:hint="0"
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -116,7 +117,8 @@
                     android:id="@+id/et_berat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="0" />
+                    android:hint="0"
+                    android:inputType="number"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -133,13 +135,15 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Panjang" />
+                    android:text="Panjang"
+                    />
 
                 <EditText
                     android:id="@+id/et_panjang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="0" />
+                    android:hint="0"
+                    android:inputType="number" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,7 +167,8 @@
                     android:id="@+id/et_lebar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="0" />
+                    android:hint="0"
+                    android:inputType="number"/>
 
                 <TextView
                     android:layout_width="wrap_content"
