@@ -1,6 +1,5 @@
 package com.example.user.prosi_1;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,6 +38,9 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
     private Uri filePath;
 
     private final int PICK_IMAGE_REQUEST = 71;
+
+    int adminFeeCalculated = 0;
+    int kuantitasBarang = 0;
 
     //Firebase
     StorageReference storageReference;
@@ -80,11 +82,13 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == calculate){
-            int hargaCalculated = Integer.parseInt(harga.getText().toString());
-            int adminFeeCalculated = hargaCalculated*25/100;
+            this.kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
+
+            int hargaCalculated = Integer.parseInt(harga.getText().toString()) * kuantitasBarang;
+            this.adminFeeCalculated = hargaCalculated*25/100;
             int ongkirFeeCalculated = hargaCalculated/10;
 
-            int totalFeeCalculated = hargaCalculated + adminFeeCalculated + ongkirFeeCalculated;
+            int totalFeeCalculated = hargaCalculated + this.adminFeeCalculated + ongkirFeeCalculated;
 
             adminFee.setText(""+adminFeeCalculated);
             ongkirFee.setText(""+ongkirFeeCalculated);
@@ -100,11 +104,12 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             int beratBarang = Integer.parseInt(berat.getText().toString());
             String deskripsiBarang = deskripsi.getText().toString();
             StorageReference gambarBarang = ref;
-            int hargaBarang = Integer.parseInt(harga.getText().toString());
+            int hargaBarang = Integer.parseInt(harga.getText().toString()) * kuantitasBarang;
             int lebarBarang = Integer.parseInt(lebar.getText().toString());
             String namaBarang = nama.getText().toString();
             int panjangBarang = Integer.parseInt(panjang.getText().toString());
-            String statusBarang="";
+            String statusBarang= "";
+            String idBarang = UUID.randomUUID().toString();
 
             if(cb_status.isChecked()){
                 statusBarang = "Ya";
@@ -113,15 +118,18 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
                 statusBarang = "Tidak";
             }
 
-            int kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
+            this.kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
 
             this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
             ref.putFile(filePath);
 
-            BarangPostRequest barang = new BarangPostRequest(beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
-                    panjangBarang,statusBarang,kuantitasBarang);
+            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang,deskripsiBarang,gambarBarang,hargaBarang,lebarBarang,namaBarang,
+                    panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
 
-            mDatabase.child("barang/"+ UUID.randomUUID().toString()).setValue(barang);
+            mDatabase.child("barang").child(idBarang).setValue(barang);
+
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
         }
     }
 

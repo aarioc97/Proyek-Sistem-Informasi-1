@@ -13,9 +13,6 @@ import java.io.IOException;
 
 public class SignUpLogin extends AppCompatActivity implements View.OnClickListener{
 
-    private DatabaseHelper mDBHelper;
-    private SQLiteDatabase mDb;
-
     Button signUp, logins;
 
     @Override
@@ -32,8 +29,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
 
     }
-
-
 
     @Override
     public void onClick(View view) {

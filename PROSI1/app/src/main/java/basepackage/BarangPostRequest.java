@@ -1,35 +1,37 @@
 package basepackage;
-
 import android.media.Image;
 
 import com.google.firebase.storage.StorageReference;
+
+import java.io.Serializable;
 
 /**
  * Created by user on 06/05/2018.
  */
 
 public class BarangPostRequest extends Requester {
-    int idBarang;
-    int kodePR;
-    int biaysAdmin;
-    int jumlahPR;
-    String statusPR;
-    String statusPost;
-    String jenisBarang;
-    String namaBarang;
-    String kodeBarang;
-    String deskripsi;
-    String statusPecahBelah;
-    int berat;
-    int harga;
-    int panjang;
-    int lebar;
-    Image foto;
-    StorageReference rf;
+    public String idBarang;
+    public int kodePR;
+    public int biayaAdmin;
+    public int jumlahPR;
+    public String statusPR;
+    public String statusPost;
+    public String jenisBarang;
+    public String namaBarang;
+    public String kodeBarang;
+    public String deskripsi;
+    public String statusPecahBelah;
+    public int berat;
+    public int harga;
+    public int panjang;
+    public int lebar;
+    public Image foto;
+    public StorageReference rf;
 
-    public BarangPostRequest(int berat,String deskripsi,StorageReference foto, int harga, int lebar,
-                             String namaBarang, int panjang, String statusPecahBelah,int jumlahPR){
+    public BarangPostRequest(String idBarang, int berat,String deskripsi,StorageReference foto, int harga, int lebar,
+                             String namaBarang, int panjang, String statusPecahBelah,int jumlahPR,int biayaAdmin){
 
+        this.idBarang = idBarang;
         this.berat = berat;
         this.deskripsi = deskripsi;
         this.rf = foto;
@@ -40,6 +42,7 @@ public class BarangPostRequest extends Requester {
         this.panjang = panjang;
         this.statusPecahBelah = statusPecahBelah;
         this.jumlahPR = jumlahPR;
+        this.biayaAdmin = biayaAdmin;
 
     }
 
