@@ -1,18 +1,32 @@
 package com.example.user.prosi_1;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.List;
+
+import basepackage.BarangPostRequest;
+
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("barang");
+    private StorageReference mStorageRef;
+    private DatabaseReference mDatabaseRef;
+    private List<BarangPostRequest> mUploads;
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -42,6 +56,25 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("barang");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("barang");
+
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    BarangPostRequest barangPostRequest = postSnapshot.getValue(BarangPostRequest.class);
+                    mUploads.add(barangPostRequest);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         imageView.setImageResource(mThumbIds[position]);
         return imageView;
