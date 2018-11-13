@@ -6,8 +6,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("barang");
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -56,4 +61,8 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.sample_4, R.drawable.sample_5,
             R.drawable.sample_6, R.drawable.sample_7
     };
+
+    public void setImage(){
+
+    }
 }
