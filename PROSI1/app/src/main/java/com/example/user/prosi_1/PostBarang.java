@@ -3,19 +3,24 @@ package com.example.user.prosi_1;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -103,7 +108,6 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
         if(v == post){
             int beratBarang = Integer.parseInt(berat.getText().toString());
             String deskripsiBarang = deskripsi.getText().toString();
-            StorageReference gambarBarang = ref;
             int hargaBarang = Integer.parseInt(harga.getText().toString()) * kuantitasBarang;
             int lebarBarang = Integer.parseInt(lebar.getText().toString());
             String namaBarang = nama.getText().toString();
@@ -120,10 +124,14 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
             this.kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
 
-            this.ref = storageReference.child("barang/"+ UUID.randomUUID().toString());
+            String uuid = UUID.randomUUID().toString();
+
+            this.ref = storageReference.child("barang/"+ uuid);
             ref.putFile(filePath);
 
-            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang, deskripsiBarang, gambarBarang, hargaBarang, lebarBarang,
+            String gambar = storageReference.child("barang/"+ uuid).getDownloadUrl().toString();
+
+            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang, deskripsiBarang, gambar, hargaBarang, lebarBarang,
                     namaBarang, panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
 
             mDatabase.child("barang").child(idBarang).setValue(barang);

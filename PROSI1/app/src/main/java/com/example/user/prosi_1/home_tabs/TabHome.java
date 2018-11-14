@@ -24,18 +24,6 @@ public class TabHome extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home, container, false);
-
-        GridView gridview = view.findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(getActivity()));
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getActivity(), "" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
         return view;
     }
 }

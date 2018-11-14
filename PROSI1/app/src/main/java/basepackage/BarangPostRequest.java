@@ -25,16 +25,16 @@ public class BarangPostRequest extends Requester {
     public int harga;
     public int panjang;
     public int lebar;
-    public Image foto;
     public StorageReference rf;
+    public String URLFoto;
 
-    public BarangPostRequest(String idBarang, int berat,String deskripsi,StorageReference foto, int harga, int lebar,
+    public BarangPostRequest(String idBarang, int berat,String deskripsi,String foto, int harga, int lebar,
                              String namaBarang, int panjang, String statusPecahBelah,int jumlahPR,int biayaAdmin){
 
         this.idBarang = idBarang;
         this.berat = berat;
         this.deskripsi = deskripsi;
-        this.rf = foto;
+        this.URLFoto = foto;
         this.harga = harga;
         this.kodeBarang = "Request";
         this.lebar = lebar;
@@ -45,5 +45,22 @@ public class BarangPostRequest extends Requester {
         this.biayaAdmin = biayaAdmin;
 
     }
+
+    public String getName() {
+        return namaBarang;
+    }
+
+    public void setName(String name) {
+        namaBarang = name;
+    }
+
+    public String getImageUrl() {
+        return URLFoto;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        URLFoto = imageUrl;
+    }
+
 
 }

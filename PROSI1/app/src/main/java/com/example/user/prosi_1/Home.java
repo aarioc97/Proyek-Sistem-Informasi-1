@@ -6,6 +6,8 @@ import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -20,14 +22,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.prosi_1.home_tabs.TabHome;
 import com.example.user.prosi_1.home_tabs.TabRequester;
 import com.example.user.prosi_1.home_tabs.TabTraveller;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import basepackage.BarangPostRequest;
 
 public class Home extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    private ImageAdapter mAdapter;
+
+    private DatabaseReference mDatabaseRef;
+    private List<BarangPostRequest> mUploads;
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -63,6 +83,33 @@ public class Home extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+//        mRecyclerView = findViewById(R.id.recycler_view);
+//        //mRecyclerView.setHasFixedSize(true);
+//        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        mUploads = new ArrayList<>();
+//
+//        mDatabaseRef = FirebaseDatabase.getInstance().getReference("barang");
+//
+//        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    BarangPostRequest upload = postSnapshot.getValue(BarangPostRequest.class);
+//                    mUploads.add(upload);
+//                }
+//
+//                mAdapter = new ImageAdapter(Home.this, mUploads);
+//
+//               // mRecyclerView.setAdapter(mAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(Home.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
 
