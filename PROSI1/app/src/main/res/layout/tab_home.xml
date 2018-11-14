@@ -28,12 +28,22 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/sv_home"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycler_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/tv_r_by_r">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+    <GridView
+        android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_r_by_r">
+        android:layout_below="@id/tv_r_by_r"
+        android:numColumns="2"
+        android:gravity="center">
 
-    </android.support.v7.widget.RecyclerView>
+    </GridView>
 
 </RelativeLayout>

@@ -1,60 +1,53 @@
+
 package com.example.user.prosi_1;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.util.List;
-
-import basepackage.BarangPostRequest;
-import com.squareup.picasso.Picasso;
-
-
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private List<BarangPostRequest> mUploads;
 
-    public ImageAdapter(Context context, List<BarangPostRequest> uploads) {
-        mContext = context;
-        mUploads = uploads;
+    public ImageAdapter(Context c) {
+        mContext = c;
     }
 
-    @Override
-    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.image_item, parent, false);
-        return new ImageViewHolder(v);
+    public int getCount() {
+        return mThumbIds.length;
     }
 
-    @Override
-    public void onBindViewHolder(ImageViewHolder holder, int position) {
-        BarangPostRequest uploadCurrent = mUploads.get(position);
-        holder.textViewName.setText(uploadCurrent.getName());
-        Picasso.get()
-                .load(uploadCurrent.getImageUrl())
-                .placeholder(R.mipmap.ic_launcher)
-                .fit()
-                .centerCrop()
-                .into(holder.imageView);
+    public Object getItem(int position) {
+        return null;
     }
 
-    @Override
-    public int getItemCount() {
-        return mUploads.size();
+    public long getItemId(int position) {
+        return 0;
     }
 
-    public class ImageViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewName;
-        public ImageView imageView;
-
-        public ImageViewHolder(View itemView) {
-            super(itemView);
-
-            textViewName = itemView.findViewById(R.id.text_view_name);
-            imageView = itemView.findViewById(R.id.image_view_upload);
+    // create a new ImageView for each item referenced by the Adapter
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {
+            // if it's not recycled, initialize some attributes
+            imageView = new ImageView(mContext);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+        } else {
+            imageView = (ImageView) convertView;
         }
+
+        imageView.setImageResource(mThumbIds[position]);
+        return imageView;
     }
+
+    // references to our images
+    private Integer[] mThumbIds = {
+            R.drawable.prosi1, R.drawable.prosi2,
+            R.drawable.prosi3, R.drawable.prosi4,
+            R.drawable.prosi5, R.drawable.prosi6,
+            R.drawable.prosi7
+    };
 }
