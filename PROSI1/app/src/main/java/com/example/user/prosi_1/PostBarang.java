@@ -137,6 +137,8 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
             mDatabase.child("barang").child(idBarang).setValue(barang);
 
+            mDatabase.child("post_rq/"+ UUID.randomUUID().toString()).setValue(idBarang,barang.getStatusBarang());
+
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
         }

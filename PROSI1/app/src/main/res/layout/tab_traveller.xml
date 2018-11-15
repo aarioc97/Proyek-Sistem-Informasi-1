@@ -39,4 +39,14 @@
         android:text="@string/post_barang_ready_stock"
         android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/btn_post_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tutorial_req"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="Post Trip"
+        android:textAllCaps="false" />
+
 </RelativeLayout>

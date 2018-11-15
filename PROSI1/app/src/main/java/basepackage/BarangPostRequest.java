@@ -29,6 +29,7 @@ public class BarangPostRequest extends Requester {
     public int lebar;
     public StorageReference rf;
     public String imageURL;
+    public String statusBarang = "Belum Disetujui";
 
 
     public BarangPostRequest(String idBarang, int berat,String deskripsi,String foto, int harga, int lebar,
@@ -49,6 +50,20 @@ public class BarangPostRequest extends Requester {
         this.jumlahPR = jumlahPR;
         this.biayaAdmin = biayaAdmin;
 
+    }
+
+    public String getStatusBarang(){
+        return statusBarang;
+    }
+
+    public String setStatusBarang(){
+        statusBarang = "Belum Disetujui";
+        return statusBarang;
+    }
+
+    public String setIdBarang(String idBarang){
+        this.idBarang = idBarang;
+        return statusBarang;
     }
 
     public String getName() {
