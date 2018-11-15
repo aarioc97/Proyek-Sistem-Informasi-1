@@ -1,6 +1,8 @@
 package basepackage;
 import android.media.Image;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
@@ -26,7 +28,8 @@ public class BarangPostRequest extends Requester {
     public int panjang;
     public int lebar;
     public StorageReference rf;
-    public String URLFoto;
+    public String imageURL;
+
 
     public BarangPostRequest(String idBarang, int berat,String deskripsi,String foto, int harga, int lebar,
                              String namaBarang, int panjang, String statusPecahBelah,int jumlahPR,int biayaAdmin){
@@ -34,7 +37,9 @@ public class BarangPostRequest extends Requester {
         this.idBarang = idBarang;
         this.berat = berat;
         this.deskripsi = deskripsi;
-        this.URLFoto = foto;
+
+        this.imageURL = foto;
+
         this.harga = harga;
         this.kodeBarang = "Request";
         this.lebar = lebar;
@@ -53,14 +58,5 @@ public class BarangPostRequest extends Requester {
     public void setName(String name) {
         namaBarang = name;
     }
-
-    public String getImageUrl() {
-        return URLFoto;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        URLFoto = imageUrl;
-    }
-
 
 }

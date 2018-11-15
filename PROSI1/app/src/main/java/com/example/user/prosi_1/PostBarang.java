@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -129,7 +130,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             this.ref = storageReference.child("barang/"+ uuid);
             ref.putFile(filePath);
 
-            String gambar = storageReference.child("barang/"+ uuid).getDownloadUrl().toString();
+            String gambar = storageReference.child("barang/"+ uuid+".jpeg").getPath();
 
             BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang, deskripsiBarang, gambar, hargaBarang, lebarBarang,
                     namaBarang, panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
