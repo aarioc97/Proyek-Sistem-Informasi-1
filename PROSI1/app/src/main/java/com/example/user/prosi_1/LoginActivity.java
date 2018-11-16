@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity{
     ProgressBar pbLogin;
 
     FirebaseAuth firebaseAuth;
+    String email;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,8 @@ public class LoginActivity extends AppCompatActivity{
         this.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editTextEmail.getText().toString();
-                final String password = editTextPassword.getText().toString();
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
 
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     textInputLayoutEmail.setError("Please enter valid email!");

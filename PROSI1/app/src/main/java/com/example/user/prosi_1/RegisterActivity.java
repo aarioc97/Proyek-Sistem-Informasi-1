@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,14 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -40,10 +48,13 @@ public class RegisterActivity extends AppCompatActivity{
 
     //Declaration Button
     Button buttonRegister;
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    StorageReference storageReference;
 
     FirebaseAuth firebaseAuth;
-    GoogleApiClient mGoogleApiClient;
-    private static final int RC_SIGN_UP = 9001;
+    String userName;
+    String email;
+    String password;
 
     //Declaration SqliteHelper
 //    DatabaseHelper databaseHelper;
@@ -62,53 +73,43 @@ public class RegisterActivity extends AppCompatActivity{
         this.textInputLayoutUserName = this.findViewById(R.id.textInputLayoutEmail);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         this.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String userName = editTextUserName.getText().toString();
-                final String email = editTextEmail.getText().toString();
-                final String password = editTextPassword.getText().toString();
+                userName = editTextUserName.getText().toString();
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
 
                 if (userName.isEmpty()) {
                     textInputLayoutUserName.setError("Please enter valid username!");
-                } else {
-                    if (userName.length() > 5) {
-                        textInputLayoutUserName.setError(null);
-                    } else {
-                        textInputLayoutUserName.setError("Username is to short!");
-                    }
-                }
-
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     textInputLayoutEmail.setError("Please enter valid email!");
-                } else {
-                    textInputLayoutEmail.setError(null);
-                }
-
-                if (password.isEmpty()) {
+                } else if (password.isEmpty()) {
                     textInputLayoutPassword.setError("Please enter valid password!");
                 } else {
-                    if (password.length() > 5) {
-                        textInputLayoutPassword.setError(null);
-                    } else {
-                        textInputLayoutPassword.setError("Password is to short!");
-                    }
-                }
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),"Verification e-mail sent to " + email,Toast.LENGTH_SHORT).show();
+                                String userId = firebaseAuth.getCurrentUser().getUid();
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    startActivity(new Intent(getApplicationContext(),Home.class));
-                                    finish();
-                                }
-                                else{
-                                    Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
-                                }
+                                User user = new User(userId, userName, email, password);
+
+                                mDatabase.child("users").child(userId).setValue(user);
+
+                                startActivity(new Intent(getApplicationContext(),Home.class));
+                                Log.d("pindah intent", "bisa pindah intent");
+                                finish();
                             }
-                        });
+                            else{
+                                Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
     }

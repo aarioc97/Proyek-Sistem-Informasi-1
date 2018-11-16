@@ -1,32 +1,50 @@
 package com.example.user.prosi_1;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class SecondPhaseLogin extends AppCompatActivity implements View.OnClickListener{
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+//masih gagal verifikasi e-mail.
+
+public class SecondPhaseRegister extends AppCompatActivity implements View.OnClickListener{
 
     Button submit;
+    TextView verification;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second_phase_login);
+        setContentView(R.layout.activity_second_phase_register);
         submit = findViewById(R.id.btn_submit);
-
+        this.verification = this.findViewById(R.id.verification);
+        Log.d("onCreate", "oncreate jalan sampe sini");
+        this.user = this.firebaseAuth.getCurrentUser();
         submit.setOnClickListener(this);
+        verification.setText("verificated: " + String.valueOf(this.user.isEmailVerified()));
     }
 
     @Override
     public void onClick(View view) {
         if(view.getId() == submit.getId()){
-            Intent intent = new Intent(this, InputRekening.class);
-            startActivity(intent);
+            if(this.user.isEmailVerified() == true){
+                Intent intent = new Intent(this, Home.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this, "Verificate your e-mail first!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

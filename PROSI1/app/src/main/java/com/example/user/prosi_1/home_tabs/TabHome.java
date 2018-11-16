@@ -31,8 +31,7 @@ public class TabHome extends Fragment{
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(getActivity(), "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
