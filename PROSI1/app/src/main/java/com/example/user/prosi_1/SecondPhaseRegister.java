@@ -2,6 +2,7 @@ package com.example.user.prosi_1;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -18,34 +21,49 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SecondPhaseRegister extends AppCompatActivity implements View.OnClickListener{
 
-    Button submit;
+    Button submit, sendEmail;
     TextView verification;
-//    FirebaseAuth firebaseAuth;
-//    FirebaseUser user;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_phase_register);
-        submit = findViewById(R.id.btn_submit);
+        this.submit = this.findViewById(R.id.btn_submit);
         this.verification = this.findViewById(R.id.verification);
-//        Log.d("onCreate", "oncreate jalan sampe sini");
-//        this.user = this.firebaseAuth.getCurrentUser();
-//        submit.setOnClickListener(this);
-//        verification.setText("verificated: " + String.valueOf(this.user.isEmailVerified()));
+        this.sendEmail = this.findViewById(R.id.btn_send_ver);
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        this.submit.setOnClickListener(this);
+        this.sendEmail.setOnClickListener(this);
+        verification.setText("verificated: " + String.valueOf(this.firebaseAuth.getCurrentUser().isEmailVerified()));
     }
 
     @Override
     public void onClick(View view) {
-//        if(view.getId() == submit.getId()){
-//            if(this.user.isEmailVerified() == true){
-//                Intent intent = new Intent(this, Home.class);
-//                startActivity(intent);
-//            }
-//            else{
-//                Toast.makeText(this, "Verificate your e-mail first!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        if(view.getId() == submit.getId()){
+            if(this.firebaseAuth.getCurrentUser().isEmailVerified() == true){
+                verification.setText("verificated: " + String.valueOf(this.firebaseAuth.getCurrentUser().isEmailVerified()));
+                Intent intent = new Intent(this, Home.class);
+                startActivity(intent);
+            }
+            else{
+                verification.setText("verificated: " + String.valueOf(this.firebaseAuth.getCurrentUser().isEmailVerified()));
+                Toast.makeText(this, "Verificate your e-mail first!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(view.getId() == sendEmail.getId()){
+            firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(getApplicationContext(),"Verification e-mail has been sent!",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Failed to sent verification e-mail!",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
 //    @Override

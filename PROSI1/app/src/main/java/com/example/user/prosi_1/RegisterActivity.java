@@ -76,9 +76,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         storageReference = FirebaseStorage.getInstance().getReference();
 
         this.buttonRegister.setOnClickListener(this);
-//        startActivity(new Intent(this,SecondPhaseRegister.class));
-//        Log.d("pindah intent", "bisa pindah intent");
-//        finish();
     }
 
     @Override
@@ -98,11 +95,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                                String userId = firebaseAuth.getCurrentUser().getUid();
+//                        String userId = firebaseAuth.getCurrentUser().getUid();
+//                        User user = new User(userId, userName, email, password);
+//                        mDatabase.child("users").child(userId).setValue(user);
 
-                                User user = new User(userId, userName, email, password);
-
-                                mDatabase.child("users").child(userId).setValue(user);
                         Toast.makeText(getApplicationContext(),"bisa buat user",Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -110,24 +106,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
             });
-
-                    FirebaseUser currUser = firebaseAuth.getCurrentUser();
-                    currUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(),"Verification e-mail has been sent!",Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(),"Failed to sent verification e-mail!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
+            startActivity(new Intent(this, SecondPhaseRegister.class));
+            finish();
         }
-
-        startActivity(new Intent(this, SecondPhaseRegister.class));
-        finish();
 
     }
 }

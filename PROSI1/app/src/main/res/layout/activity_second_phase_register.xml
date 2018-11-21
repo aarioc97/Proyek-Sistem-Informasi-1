@@ -25,31 +25,36 @@
         android:layout_marginBottom="20dp"
         android:layout_below="@id/logo"/>
 
-    <LinearLayout
-        android:id="@+id/ll_input_submit"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/verification_exp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:text="@string/verification"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/tv_se"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical"
-        android:layout_below="@id/tv_se">
+        android:layout_marginRight="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textAlignment="center"
-            android:text="@string/verification"/>
+    <TextView
+        android:id="@+id/verification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/verification_exp"/>
 
-        <TextView
-            android:id="@+id/verification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_send_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Verification E-mail"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/btn_submit"/>
 
     <Button
         android:id="@+id/btn_submit"
