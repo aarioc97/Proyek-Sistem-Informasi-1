@@ -34,7 +34,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.UUID;
 
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Declaration EditTexts
     EditText editTextUserName;
@@ -75,42 +75,59 @@ public class RegisterActivity extends AppCompatActivity{
         this.firebaseAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        this.buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userName = editTextUserName.getText().toString();
-                email = editTextEmail.getText().toString();
-                password = editTextPassword.getText().toString();
+        this.buttonRegister.setOnClickListener(this);
+//        startActivity(new Intent(this,SecondPhaseRegister.class));
+//        Log.d("pindah intent", "bisa pindah intent");
+//        finish();
+    }
 
-                if (userName.isEmpty()) {
-                    textInputLayoutUserName.setError("Please enter valid username!");
-                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    textInputLayoutEmail.setError("Please enter valid email!");
-                } else if (password.isEmpty()) {
-                    textInputLayoutPassword.setError("Please enter valid password!");
-                } else {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(),"Verification e-mail sent to " + email,Toast.LENGTH_SHORT).show();
+    @Override
+    public void onClick(View view) {
+        this.userName = this.editTextUserName.getText().toString();
+        this.email = this.editTextEmail.getText().toString();
+        this.password = this.editTextPassword.getText().toString();
+
+        if (userName.isEmpty()) {
+            this.textInputLayoutUserName.setError("Please enter valid username!");
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            this.textInputLayoutEmail.setError("Please enter valid email!");
+        } else if (password.isEmpty()) {
+            this.textInputLayoutPassword.setError("Please enter valid password!");
+        } else {
+            this.firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
                                 String userId = firebaseAuth.getCurrentUser().getUid();
 
                                 User user = new User(userId, userName, email, password);
 
                                 mDatabase.child("users").child(userId).setValue(user);
+                        Toast.makeText(getApplicationContext(),"bisa buat user",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
-                                startActivity(new Intent(getApplicationContext(),Home.class));
-                                Log.d("pindah intent", "bisa pindah intent");
-                                finish();
+                    FirebaseUser currUser = firebaseAuth.getCurrentUser();
+                    currUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),"Verification e-mail has been sent!",Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Failed to sent verification e-mail!",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-                }
-            }
-        });
+
+        }
+
+        startActivity(new Intent(this, SecondPhaseRegister.class));
+        finish();
+
     }
 }

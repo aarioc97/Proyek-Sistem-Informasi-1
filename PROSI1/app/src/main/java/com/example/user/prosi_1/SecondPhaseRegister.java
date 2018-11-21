@@ -20,8 +20,8 @@ public class SecondPhaseRegister extends AppCompatActivity implements View.OnCli
 
     Button submit;
     TextView verification;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser user;
+//    FirebaseAuth firebaseAuth;
+//    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,43 +29,43 @@ public class SecondPhaseRegister extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_second_phase_register);
         submit = findViewById(R.id.btn_submit);
         this.verification = this.findViewById(R.id.verification);
-        Log.d("onCreate", "oncreate jalan sampe sini");
-        this.user = this.firebaseAuth.getCurrentUser();
-        submit.setOnClickListener(this);
-        verification.setText("verificated: " + String.valueOf(this.user.isEmailVerified()));
+//        Log.d("onCreate", "oncreate jalan sampe sini");
+//        this.user = this.firebaseAuth.getCurrentUser();
+//        submit.setOnClickListener(this);
+//        verification.setText("verificated: " + String.valueOf(this.user.isEmailVerified()));
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == submit.getId()){
-            if(this.user.isEmailVerified() == true){
-                Intent intent = new Intent(this, Home.class);
-                startActivity(intent);
-            }
-            else{
-                Toast.makeText(this, "Verificate your e-mail first!", Toast.LENGTH_SHORT).show();
-            }
-        }
+//        if(view.getId() == submit.getId()){
+//            if(this.user.isEmailVerified() == true){
+//                Intent intent = new Intent(this, Home.class);
+//                startActivity(intent);
+//            }
+//            else{
+//                Toast.makeText(this, "Verificate your e-mail first!", Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 
-    @Override
-    public void onBackPressed(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda akan membatalkan pendaftaran?");
-        builder.setCancelable(true);
-        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
+//    @Override
+//    public void onBackPressed(){
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("Apakah Anda akan membatalkan pendaftaran?");
+//        builder.setCancelable(true);
+//        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                dialogInterface.cancel();
+//            }
+//        });
+//        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                finish();
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//    }
 }

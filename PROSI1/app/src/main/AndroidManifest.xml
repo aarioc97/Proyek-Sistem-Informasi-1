@@ -37,7 +37,8 @@
         <activity android:name=".Home2" />
         <activity
             android:name=".Home3"
-            android:label="@string/title_activity_home3"></activity>
+            android:label="@string/title_activity_home3" />
+        <activity android:name=".SecondPhaseRegister"></activity>
     </application>
 
 </manifest>
