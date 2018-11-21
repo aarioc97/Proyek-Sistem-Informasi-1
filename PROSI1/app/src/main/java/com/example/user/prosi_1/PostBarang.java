@@ -3,11 +3,10 @@ package com.example.user.prosi_1;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,15 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import basepackage.BarangPostRequest;
@@ -50,6 +50,8 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
     //Firebase
     StorageReference storageReference;
+
+    public ArrayList<String> arrayIdBarang = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,20 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        mDatabase.child("barang").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    arrayIdBarang.add(postSnapshot.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
@@ -114,7 +130,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             String namaBarang = nama.getText().toString();
             int panjangBarang = Integer.parseInt(panjang.getText().toString());
             String statusBarang= "";
-            String idBarang = UUID.randomUUID().toString();
+            final String idBarang = UUID.randomUUID().toString();
 
             if(cb_status.isChecked()){
                 statusBarang = "Ya";
@@ -138,6 +154,8 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
             mDatabase.child("barang").child(idBarang).setValue(barang);
 
             mDatabase.child("post_rq/"+ UUID.randomUUID().toString()).setValue(idBarang,barang.getStatusBarang());
+
+            System.out.println(arrayIdBarang);
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
