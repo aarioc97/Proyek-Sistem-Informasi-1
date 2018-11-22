@@ -6,6 +6,7 @@ public class User {
     public String userName;
     public String email;
     public String password;
+    public String role;
 
     public User(String id, String userName, String email, String password) {
         this.id = id;
@@ -14,4 +15,7 @@ public class User {
         this.password = password;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

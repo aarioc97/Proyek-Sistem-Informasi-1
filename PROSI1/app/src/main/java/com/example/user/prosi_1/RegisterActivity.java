@@ -95,18 +95,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-//                        String userId = firebaseAuth.getCurrentUser().getUid();
-//                        User user = new User(userId, userName, email, password);
-//                        mDatabase.child("users").child(userId).setValue(user);
-
-                        Toast.makeText(getApplicationContext(),"bisa buat user",Toast.LENGTH_SHORT).show();
+                        String userId = firebaseAuth.getCurrentUser().getUid();
+                        User user = new User(userId, userName, email, password);
+                        mDatabase.child("users").child(userId).setValue(user);
                     }
                     else{
                         Toast.makeText(getApplicationContext(),"E-mail or password is wrong",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-            startActivity(new Intent(this, SecondPhaseRegister.class));
+            startActivity(new Intent(this, PilihRole.class));
             finish();
         }
 

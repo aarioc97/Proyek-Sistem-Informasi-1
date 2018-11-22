@@ -51,5 +51,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="verification">Buka e-mail yang telah Anda terima dan klik link yang tersedia. Anda akan secara otomatis terverifikasi.</string>
+    <string name="verification">Tekan tombol \"Send Verification E-mail\" di bawah ini untuk mengirim e-mail verifikasi ke akun e-mail Anda. Klik link yang tersedia, maka Anda akan otomatis terverifikasi dan dapat menekan tombol \"Submit\" di bawah.</string>
 </resources>

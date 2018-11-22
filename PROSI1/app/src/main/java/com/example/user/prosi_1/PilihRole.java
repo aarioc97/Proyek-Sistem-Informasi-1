@@ -10,10 +10,24 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PilihRole extends AppCompatActivity implements View.OnClickListener{
 
     Button traveller, requester;
+    FirebaseAuth firebaseAuth;
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +38,23 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
         traveller.setOnClickListener(this);
         requester.setOnClickListener(this);
+
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
     public void onClick(View view) {
-//        if(view.getId() == traveller.getId()){
+        if(view.getId() == traveller.getId()){
+            String userId = firebaseAuth.getCurrentUser().getUid();
+
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("role", "traveller");
+
+            mDatabase.child("users").child(userId).updateChildren(userData);
+
+            startActivity(new Intent(this, Home.class));
+            finish();
 //            final Intent intent = new Intent(this, SecondPhaseLogin.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
@@ -41,8 +67,17 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 //            });
 //            AlertDialog alertDialog = builder.create();
 //            alertDialog.show();
-//        }
-//        else if(view.getId() == requester.getId()){
+        }
+        else if(view.getId() == requester.getId()){
+            String userId = firebaseAuth.getCurrentUser().getUid();
+
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("role", "requester");
+
+            mDatabase.child("users").child(userId).updateChildren(userData);
+
+            startActivity(new Intent(this, Home.class));
+            finish();
 //            final Intent intent = new Intent(this, SecondPhaseRegister.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //            builder.setMessage("Email berisi kode verifikasi untuk pendaftaran telah dikirim.");
@@ -55,7 +90,7 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 //            });
 //            AlertDialog alertDialog = builder.create();
 //            alertDialog.show();
-//        }
+        }
     }
 
     @Override
