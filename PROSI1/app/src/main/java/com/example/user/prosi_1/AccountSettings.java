@@ -9,15 +9,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountSettings extends AppCompatActivity {
 
-    EditText etUname;
+    EditText etUname, etEmail;
     Button signOut;
     FirebaseAuth firebaseAuth;
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +36,22 @@ public class AccountSettings extends AppCompatActivity {
         setContentView(R.layout.activity_account_settings);
         this.signOut = this.findViewById(R.id.btn_signout);
         this.etUname = this.findViewById(R.id.et_uname_settings);
+        this.etEmail = this.findViewById(R.id.et_email_settings);
         this.firebaseAuth = FirebaseAuth.getInstance();
-        this.etUname.setText(this.firebaseAuth.getCurrentUser().getDisplayName());
+        this.etEmail.setText(this.firebaseAuth.getCurrentUser().getEmail());
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            String userId = firebaseAuth.getCurrentUser().getUid();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                etUname.setText(dataSnapshot.child("users").child(userId).child("userName").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(AccountSettings.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         this.signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +106,12 @@ public class AccountSettings extends AppCompatActivity {
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                String userId = firebaseAuth.getCurrentUser().getUid();
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("userName", etUname.getText().toString());
+
+                mDatabase.child("users").child(userId).updateChildren(userData);
+
                 finish();
             }
         });

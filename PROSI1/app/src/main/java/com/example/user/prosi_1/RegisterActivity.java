@@ -49,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //Declaration Button
     Button buttonRegister;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    StorageReference storageReference;
 
     FirebaseAuth firebaseAuth;
     String userName;
@@ -73,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.textInputLayoutUserName = this.findViewById(R.id.textInputLayoutEmail);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
 
         this.buttonRegister.setOnClickListener(this);
     }
