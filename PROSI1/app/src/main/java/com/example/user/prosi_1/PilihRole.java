@@ -27,7 +27,6 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
     Button traveller, requester;
     FirebaseAuth firebaseAuth;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
         requester.setOnClickListener(this);
 
         this.firebaseAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -53,7 +51,7 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
             mDatabase.child("users").child(userId).updateChildren(userData);
 
-            startActivity(new Intent(this, Home.class));
+            startActivity(new Intent(this, InputRekening.class));
             finish();
 //            final Intent intent = new Intent(this, SecondPhaseLogin.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -76,7 +74,7 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
             mDatabase.child("users").child(userId).updateChildren(userData);
 
-            startActivity(new Intent(this, Home.class));
+            startActivity(new Intent(this, InputRekening.class));
             finish();
 //            final Intent intent = new Intent(this, SecondPhaseRegister.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);

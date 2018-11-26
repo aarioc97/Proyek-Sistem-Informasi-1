@@ -34,20 +34,20 @@
         <Spinner
             android:id="@+id/spinner_nama_bank"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="wrap_content">
         </Spinner>
 
         <TextView
             android:id="@+id/tv_kota_bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kota Bank"
+            android:text="Kota"
             android:textSize="8pt"/>
 
         <Spinner
             android:id="@+id/spinner_kota_bank"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="wrap_content">
         </Spinner>
 
         <android.support.design.widget.TextInputLayout
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/et_username_daftar"
+                android:id="@+id/et_nama_lengkap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama Lengkap"/>

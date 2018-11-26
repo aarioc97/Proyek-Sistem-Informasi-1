@@ -21,11 +21,12 @@ import com.example.user.prosi_1.R;
 
 public class TabRequester extends Fragment{
 
+    protected Button postReq;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_requester, container, false);
-
-        Button postReq = (Button) view.findViewById(R.id.btn_post_req);
+        this.postReq = (Button) view.findViewById(R.id.btn_post_req);
         postReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,7 +34,6 @@ public class TabRequester extends Fragment{
                 getActivity().startActivity(intent);
             }
         });
-
         return view;
 
     }

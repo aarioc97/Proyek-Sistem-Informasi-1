@@ -13,6 +13,7 @@ import java.io.Serializable;
 
 public class BarangPostRequest extends Requester {
     public String idBarang;
+    public String idUploader;
     public int kodePR;
     public int biayaAdmin;
     public int jumlahPR;
@@ -32,10 +33,11 @@ public class BarangPostRequest extends Requester {
     public String statusBarang = "Belum Disetujui";
 
 
-    public BarangPostRequest(String idBarang, int berat,String deskripsi,String foto, int harga, int lebar,
+    public BarangPostRequest(String idBarang, String idUploader, int berat,String deskripsi,String foto, int harga, int lebar,
                              String namaBarang, int panjang, String statusPecahBelah,int jumlahPR,int biayaAdmin){
 
         this.idBarang = idBarang;
+        this.idUploader = idUploader;
         this.berat = berat;
         this.deskripsi = deskripsi;
 

@@ -84,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if (userName.isEmpty()) {
             this.textInputLayoutUserName.setError("Please enter valid username!");
+        } else if(userName.contains(" ")){
+            this.textInputLayoutUserName.setError("Please enter valid username (without space)!");
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             this.textInputLayoutEmail.setError("Please enter valid email!");
         } else if (password.isEmpty()) {

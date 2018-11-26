@@ -13,7 +13,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +40,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     StorageReference ref;
 
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dbRef = database.getReference();
 
@@ -141,21 +144,21 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
             this.kuantitasBarang = Integer.parseInt(kuantitas.getText().toString());
 
-            String uuid = UUID.randomUUID().toString();
+//            String uuid = UUID.randomUUID().toString();
 
-            this.ref = storageReference.child("barang/"+ uuid);
+            this.ref = storageReference.child("barang/"+ idBarang);
             ref.putFile(filePath);
 
-            String gambar = storageReference.child("barang/"+ uuid+".jpeg").getPath();
+            String gambar = storageReference.child("barang/"+ idBarang+".jpeg").getPath();
 
-            BarangPostRequest barang = new BarangPostRequest(idBarang, beratBarang, deskripsiBarang, gambar, hargaBarang, lebarBarang,
+            BarangPostRequest barang = new BarangPostRequest(idBarang, auth.getCurrentUser().getUid(), beratBarang, deskripsiBarang, gambar, hargaBarang, lebarBarang,
                     namaBarang, panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
 
             mDatabase.child("barang").child(idBarang).setValue(barang);
 
-            mDatabase.child("post_rq/"+ UUID.randomUUID().toString()).setValue(idBarang,barang.getStatusBarang());
+            mDatabase.child("post_rq/"+ idBarang).setValue(idBarang, statusBarang);
 
-            System.out.println(arrayIdBarang);
+            Toast.makeText(this, "Barang berhasil dipost!", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
