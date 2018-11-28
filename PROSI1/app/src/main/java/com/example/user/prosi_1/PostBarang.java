@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +26,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import basepackage.BarangPostRequest;
@@ -88,7 +94,7 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        mDatabase.child("barang").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("fotoBarang").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
@@ -146,17 +152,21 @@ public class PostBarang extends AppCompatActivity implements View.OnClickListene
 
 //            String uuid = UUID.randomUUID().toString();
 
-            this.ref = storageReference.child("barang/"+ idBarang);
+            this.ref = storageReference.child("fotoBarang/"+ idBarang);
             ref.putFile(filePath);
 
-            String gambar = storageReference.child("barang/"+ idBarang+".jpeg").getPath();
+            String gambar = storageReference.child("fotoBarang/"+ idBarang+".jpeg").getPath();
 
             BarangPostRequest barang = new BarangPostRequest(idBarang, auth.getCurrentUser().getUid(), beratBarang, deskripsiBarang, gambar, hargaBarang, lebarBarang,
                     namaBarang, panjangBarang,statusBarang,kuantitasBarang, adminFeeCalculated);
 
             mDatabase.child("barang").child(idBarang).setValue(barang);
 
-            mDatabase.child("post_rq/"+ idBarang).setValue(idBarang, statusBarang);
+            Map<String, Object> postReqData = new HashMap<>();
+            postReqData.put("statusPost", "belum disetujui");
+            postReqData.put("waktuPostDisetujui", "null");
+
+            mDatabase.child("post_rq").child(idBarang).updateChildren(postReqData);
 
             Toast.makeText(this, "Barang berhasil dipost!", Toast.LENGTH_SHORT).show();
 

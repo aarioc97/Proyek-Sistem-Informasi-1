@@ -28,35 +28,32 @@ import com.google.firebase.database.ValueEventListener;
 
 public class TabHome extends Fragment{
 
-    TextView content;
-    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home, container, false);
-        this.content = view.findViewById(R.id.content_r_by_r);
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //"barang" perlu id yang lebih jelas
-                content.setText(dataSnapshot.child("barang").getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-//        GridView gridview = view.findViewById(R.id.gridview);
-//        gridview.setAdapter(new ImageAdapter(getActivity()));
+//        this.content = view.findViewById(R.id.content_r_by_r);
+//        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                //"barang" perlu id yang lebih jelas
+//                content.setText(dataSnapshot.child("barang").child("").getValue().toString());
+//            }
 //
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Toast.makeText(getContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
+        GridView gridview = view.findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(getActivity()));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
