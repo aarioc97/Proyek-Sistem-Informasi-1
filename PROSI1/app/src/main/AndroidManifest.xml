@@ -38,7 +38,8 @@
         <activity
             android:name=".Home3"
             android:label="@string/title_activity_home3" />
-        <activity android:name=".SecondPhaseRegister"></activity>
+        <activity android:name=".SecondPhaseRegister" />
+        <activity android:name=".ImageDetails"></activity>
     </application>
 
 </manifest>

@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import basepackage.AksiTraveller;
@@ -18,7 +21,7 @@ public class PostTravel extends AppCompatActivity implements View.OnClickListene
 
     EditText negara, tanggal1, tanggal2;
     Button btn_post;
-
+    FirebaseAuth firebaseAuth;
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -32,7 +35,7 @@ public class PostTravel extends AppCompatActivity implements View.OnClickListene
 
         btn_post = this.findViewById(R.id.btn_post);
         btn_post.setOnClickListener(this);
-
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -41,6 +44,12 @@ public class PostTravel extends AppCompatActivity implements View.OnClickListene
             AksiTraveller aksi = new AksiTraveller(negara.getText().toString(), tanggal1.getText().toString());
 
             mDatabase.child("act_traveller/" + UUID.randomUUID().toString()).setValue(aksi);
+
+            String userId = firebaseAuth.getCurrentUser().getUid();
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("trip", negara.getText().toString());
+
+            mDatabase.child("users").child(userId).updateChildren(userData);
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);

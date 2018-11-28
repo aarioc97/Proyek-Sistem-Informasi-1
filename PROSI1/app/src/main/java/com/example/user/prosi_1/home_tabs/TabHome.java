@@ -1,5 +1,6 @@
 package com.example.user.prosi_1.home_tabs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.prosi_1.ImageAdapter;
+import com.example.user.prosi_1.ImageDetails;
 import com.example.user.prosi_1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +47,7 @@ public class TabHome extends Fragment{
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ImageDetails.class).putExtra("pos", position));
             }
         });
 
