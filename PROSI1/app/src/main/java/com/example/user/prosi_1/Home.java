@@ -2,6 +2,7 @@ package com.example.user.prosi_1;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +47,8 @@ public class Home extends AppCompatActivity {
     private ImageAdapter mAdapter;
 
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference databaseBarang;
+
     private List<BarangPostRequest> mUploads;
 
 
@@ -62,6 +66,9 @@ public class Home extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private List<PostBarang> listBarang;
+
+    private TextView tv_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +90,16 @@ public class Home extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        databaseBarang = mDatabaseRef.child("fly-n-buy").child("barang");
+
+        listBarang = new ArrayList<>();
+
 //        mRecyclerView = findViewById(R.id.recycler_view);
 //        //mRecyclerView.setHasFixedSize(true);
 //        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //
 //        mUploads = new ArrayList<>();
-//
-//        mDatabaseRef = FirebaseDatabase.getInstance().getReference("barang");
 //
 //        mDatabaseRef.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -109,6 +119,25 @@ public class Home extends AppCompatActivity {
 //                Toast.makeText(Home.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
+    }
+
+    protected void start(){
+        super.onStart();
+        databaseBarang.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot barangSnapshot : dataSnapshot.getChildren()){
+                    PostBarang barang = barangSnapshot.getValue(PostBarang.class);
+                    listBarang.add(barang);
+                }
+                
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
