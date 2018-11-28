@@ -43,11 +43,14 @@ public class PostTravel extends AppCompatActivity implements View.OnClickListene
         if(v == btn_post){
             AksiTraveller aksi = new AksiTraveller(negara.getText().toString(), tanggal1.getText().toString());
 
-            mDatabase.child("act_traveller/" + UUID.randomUUID().toString()).setValue(aksi);
+            String idActTraveller = UUID.randomUUID().toString();
+
+            mDatabase.child("act_traveller/" + idActTraveller).setValue(aksi);
 
             String userId = firebaseAuth.getCurrentUser().getUid();
             Map<String, Object> userData = new HashMap<>();
             userData.put("trip", negara.getText().toString());
+            userData.put("id_act_traveller", idActTraveller);
 
             mDatabase.child("users").child(userId).updateChildren(userData);
 
