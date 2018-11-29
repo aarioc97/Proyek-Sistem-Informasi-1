@@ -51,7 +51,7 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
             mDatabase.child("users").child(userId).updateChildren(userData);
 
-            startActivity(new Intent(this, InputRekening.class));
+            startActivity(new Intent(this, Home.class));
             finish();
 //            final Intent intent = new Intent(this, SecondPhaseLogin.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -74,7 +74,7 @@ public class PilihRole extends AppCompatActivity implements View.OnClickListener
 
             mDatabase.child("users").child(userId).updateChildren(userData);
 
-            startActivity(new Intent(this, InputRekening.class));
+            startActivity(new Intent(this, Home.class));
             finish();
 //            final Intent intent = new Intent(this, SecondPhaseRegister.class);
 //            final AlertDialog.Builder builder = new AlertDialog.Builder(this);

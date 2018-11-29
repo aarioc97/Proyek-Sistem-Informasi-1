@@ -66,7 +66,7 @@ public class Home extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private List<PostBarang> listBarang;
+    private List<BarangPostRequest> listBarang;
 
     private TextView tv_test;
 
@@ -127,7 +127,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot barangSnapshot : dataSnapshot.getChildren()){
-                    PostBarang barang = barangSnapshot.getValue(PostBarang.class);
+                    BarangPostRequest barang = barangSnapshot.getValue(BarangPostRequest.class);
                     listBarang.add(barang);
                 }
                 
